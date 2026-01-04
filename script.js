@@ -1,41 +1,41 @@
-// CONFIGURACIÓN: Lista de Dorks
-// Puedes añadir más objetos a este array para ampliar la herramienta
+// CONFIGURATION: List of Dorks
+// You can add more objects to this array to expand the tool
 const dorksData = [
     {
-        category: "📂 Archivos y Documentos",
+        category: "📂 Files & Documents",
         items: [
-            { label: "PDFs Públicos", dork: "filetype:pdf" },
-            { label: "Excel (Tablas/Datos)", dork: "filetype:xls OR filetype:xlsx OR filetype:csv" },
-            { label: "Documentos Word", dork: "filetype:doc OR filetype:docx" },
-            { label: "Archivos de Texto", dork: "filetype:txt OR filetype:rtf OR filetype:md" }
+            { label: "Public PDFs", dork: "filetype:pdf" },
+            { label: "Excel (Tables/Data)", dork: "filetype:xls OR filetype:xlsx OR filetype:csv" },
+            { label: "Word Documents", dork: "filetype:doc OR filetype:docx" },
+            { label: "Text Files", dork: "filetype:txt OR filetype:rtf OR filetype:md" }
         ]
     },
     {
-        category: "⚙️ Configuración del Servidor",
+        category: "⚙️ Server Configuration",
         items: [
             { label: "Directory Traversal", dork: "intitle:\"index of\"" },
-            { label: "Archivos de Config", dork: "filetype:xml OR filetype:conf OR filetype:cnf OR filetype:reg OR filetype:inf" },
-            { label: "Logs de Errores", dork: "filetype:log OR filetype:err" },
-            { label: "Bases de Datos SQL", dork: "filetype:sql OR filetype:dbf OR filetype:mdb" }
+            { label: "Config Files", dork: "filetype:xml OR filetype:conf OR filetype:cnf OR filetype:reg OR filetype:inf" },
+            { label: "Error Logs", dork: "filetype:log OR filetype:err" },
+            { label: "SQL Databases", dork: "filetype:sql OR filetype:dbf OR filetype:mdb" }
         ]
     },
     {
-        category: "🔐 Puntos de Entrada",
+        category: "🔐 Entry Points",
         items: [
-            { label: "Paneles de Admin", dork: "inurl:admin OR inurl:login OR inurl:wp-login" },
-            { label: "Carpetas .Git Expuestas", dork: "inurl:/.git" },
-            { label: "Archivos ENV", dork: "filetype:env" },
+            { label: "Admin Panels", dork: "inurl:admin OR inurl:login OR inurl:wp-login" },
+            { label: "Exposed .Git Folders", dork: "inurl:/.git" },
+            { label: "ENV Files", dork: "filetype:env" },
             { label: "Backups", dork: "filetype:bak OR filetype:old OR filetype:backup" }
         ]
     }
 ];
 
-// INICIALIZACIÓN
+// INITIALIZATION
 document.addEventListener('DOMContentLoaded', () => {
     renderButtons();
 });
 
-// Renderiza los botones dinámicamente basado en dorksData
+// Dynamically render buttons based on dorksData
 function renderButtons() {
     const container = document.getElementById('dorks-container');
     
@@ -50,7 +50,7 @@ function renderButtons() {
         cat.items.forEach(item => {
             const btn = document.createElement('button');
             btn.innerText = item.label;
-            btn.setAttribute('aria-label', `Buscar ${item.label}`);
+            btn.setAttribute('aria-label', `Search for ${item.label}`);
             btn.onclick = () => updateAndSearch(item.dork);
             card.appendChild(btn);
         });
@@ -59,59 +59,59 @@ function renderButtons() {
     });
 }
 
-// Lógica Principal
+// Main Logic
 function updateAndSearch(dorkQuery) {
     let domain = document.getElementById('target').value;
 
-    // 1. Validación y Limpieza
+    // 1. Validation and Cleaning
     if (!domain) {
-        alert("⚠️ Error: Por favor, escribe un dominio objetivo primero.");
+        alert("⚠️ Error: Please enter a target domain first.");
         document.getElementById('target').focus();
         return;
     }
 
-    // Regex para limpiar http, www y rutas
+    // Regex to clean http, www and paths
     domain = domain.replace(/^(https?:\/\/)?(www\.)?/, '').replace(/\/.*$/, '');
     
-    // Actualizar el input con el dominio limpio (UX)
+    // Update input with clean domain (UX)
     document.getElementById('target').value = domain;
 
-    // 2. Construcción de la Query
+    // 2. Query Construction
     const fullQuery = `site:${domain} ${dorkQuery}`;
 
-    // 3. UI Update (Mostrar query)
+    // 3. UI Update (Show query)
     const previewBox = document.getElementById('query-preview');
     const queryText = document.getElementById('query-text');
     
     previewBox.classList.remove('hidden');
     queryText.innerText = fullQuery;
 
-    // Configurar botón de copiado
+    // Copy button setup
     const copyBtn = document.getElementById('copy-btn');
     copyBtn.onclick = () => {
         navigator.clipboard.writeText(fullQuery).then(() => {
             const originalText = copyBtn.innerText;
-            copyBtn.innerText = "¡Copiado!";
+            copyBtn.innerText = "Copied!";
             setTimeout(() => copyBtn.innerText = originalText, 1500);
         });
     };
 
-    // 4. Ejecutar búsqueda
+    // 4. Execute search
     const googleUrl = `https://www.google.com/search?q=${encodeURIComponent(fullQuery)}`;
     window.open(googleUrl, '_blank');
 }
 
-// Lógica para el Custom Dork
+// Custom Dork Logic
 function runCustomDork() {
     const customDork = document.getElementById('custom-dork-input').value;
     if(customDork) {
-        // Si el usuario ya escribió 'site:domino', no lo duplicamos, sino usamos búsqueda directa
+        // If user already wrote 'site:domain', don't duplicate it, just search directly
         if (customDork.includes('site:')) {
             window.open(`https://www.google.com/search?q=${encodeURIComponent(customDork)}`, '_blank');
         } else {
             updateAndSearch(customDork);
         }
     } else {
-        alert("Introduce un dork personalizado.");
+        alert("Please enter a custom dork.");
     }
 }
