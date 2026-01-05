@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top 10 Google Dorks for Bug Bounty Hunting (2026) | DorkSearch PRO</title>
+    <meta name="description" content="A curated list of the most effective Google Dorks for finding vulnerabilities, exposed databases, and configuration files during bug bounty engagements.">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        /* Reutilizamos estilos del artículo anterior */
+        body { background-color: #0d1117; color: #c9d1d9; font-family: 'Roboto Mono', monospace; line-height: 1.8; }
+        .article-container { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+        .breadcrumb { margin-bottom: 30px; font-size: 0.9rem; color: #8b949e; }
+        .breadcrumb a { color: #58a6ff; text-decoration: none; }
+        h1 { font-size: 2.2rem; color: #fff; margin-bottom: 10px; }
+        h2 { color: #fff; margin-top: 40px; border-left: 4px solid #2ea043; padding-left: 15px; }
+        code { background: rgba(110, 118, 129, 0.4); padding: 0.2em 0.4em; border-radius: 6px; font-family: 'Courier New', monospace; color: #ff7b72; }
+        .dork-card { background: #161b22; border: 1px solid #30363d; padding: 20px; margin: 20px 0; border-radius: 8px; }
+        .copy-btn { float: right; cursor: pointer; color: #2ea043; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+
+    <div class="article-container">
+        <div class="breadcrumb">
+            <a href="../index.html">Home</a> / <a href="index.html">Academy</a> / Top 10 Dorks
+        </div>
+
+        <article>
+            <h1>Top 10 Google Dorks for Bug Bounty Hunters</h1>
+            <div style="color: #8b949e; margin-bottom: 30px; border-bottom: 1px solid #30363d; padding-bottom: 20px;">
+                Updated: January 5, 2026 • <strong>Technical Guide</strong>
+            </div>
+
+            <p>Google Dorking is a staple in the reconnaissance phase of any Bug Bounty program. Before you launch Burp Suite or Nmap, you should always check what the target has already leaked to the public index.</p>
+            <p>Here are the top 10 most effective dorks for identifying low-hanging fruit vulnerabilities.</p>
+
+            <h2>1. Finding Exposed Environment Files</h2>
+            <p>The <code>.env</code> file is the holy grail for hackers. It often contains API keys, database credentials, and debug settings.</p>
+            <div class="dork-card">
+                <code>filetype:env "DB_PASSWORD" site:example.com</code>
+            </div>
+
+            <h2>2. Publicly Accessible Log Files</h2>
+            <p>Log files can leak user data, internal IP addresses, and system pathways.</p>
+            <div class="dork-card">
+                <code>filetype:log OR filetype:txt intext:"password" site:example.com</code>
+            </div>
+
+            <h2>3. Exposed SQL Database Dumps</h2>
+            <p>Developers sometimes leave database backups in public directories. These files usually contain the entire database schema and data.</p>
+            <div class="dork-card">
+                <code>filetype:sql intext:"INSERT INTO" site:example.com</code>
+            </div>
+
+            <h2>4. Directory Listing Enabled</h2>
+            <p>When a server is misconfigured, it lists all files in a directory. This allows you to browse the file system like a local folder.</p>
+            <div class="dork-card">
+                <code>intitle:"index of /" "parent directory" site:example.com</code>
+            </div>
+
+            <h2>5. Configuration Files (XML/CONF)</h2>
+            <p>These files often reveal server versions and internal network architecture.</p>
+            <div class="dork-card">
+                <code>filetype:xml OR filetype:conf intext:password site:example.com</code>
+            </div>
+
+            <h2>6. Exposed Git Repositories</h2>
+            <p>Finding a <code>.git</code> folder exposes the entire version history of the project.</p>
+            <div class="dork-card">
+                <code>inurl:/.git site:example.com</code>
+            </div>
+
+            <h2>7. WordPress User Enumeration</h2>
+            <p>Find hidden WordPress login pages or author archives.</p>
+            <div class="dork-card">
+                <code>inurl:wp-content OR inurl:wp-includes site:example.com</code>
+            </div>
+
+            <h2>8. PHP Errors and Warnings</h2>
+            <p>Forcing Google to find pages that are crashing can reveal the absolute path of the script.</p>
+            <div class="dork-card">
+                <code>filetype:php intext:"fatal error" site:example.com</code>
+            </div>
+
+            <h2>9. Public S3 Buckets</h2>
+            <p>While not strictly a "dork", Google indexes open Amazon S3 buckets.</p>
+            <div class="dork-card">
+                <code>site:s3.amazonaws.com "company-name"</code>
+            </div>
+
+            <h2>10. Login Portals</h2>
+            <p>Finding the admin panel is step one to testing authentication.</p>
+            <div class="dork-card">
+                <code>inurl:login OR inurl:admin OR intitle:"login" site:example.com</code>
+            </div>
+
+            <div style="background: rgba(46, 160, 67, 0.1); border: 1px solid #2ea043; padding: 25px; margin-top: 40px; border-radius: 8px; text-align: center;">
+                <h3>⚡ Don't type these manually!</h3>
+                <p>Our tool automates all these queries with one click.</p>
+                <a href="../index.html" style="display: inline-block; background: #2ea043; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-weight: bold;">Go to Generator</a>
+            </div>
+
+        </article>
+        
+        <footer style="margin-top: 50px; text-align: center; font-size: 0.9rem; color: #8b949e;">
+            <p><a href="index.html">Back to Academy</a></p>
+        </footer>
+    </div>
+</body>
+</html>

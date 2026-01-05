@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Defensive Dorking: How to Audit Your Own Website | DorkSearch PRO</title>
+    <meta name="description" content="Learn how to use Google Dorks for defensive purposes. Audit your organization's security posture and remove sensitive files from Google's index.">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        body { background-color: #0d1117; color: #c9d1d9; font-family: 'Roboto Mono', monospace; line-height: 1.8; }
+        .article-container { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+        .breadcrumb { margin-bottom: 30px; font-size: 0.9rem; color: #8b949e; }
+        .breadcrumb a { color: #58a6ff; text-decoration: none; }
+        h1 { font-size: 2.2rem; color: #fff; margin-bottom: 10px; }
+        h2 { color: #fff; margin-top: 40px; border-left: 4px solid #58a6ff; padding-left: 15px; } /* Azul para defensa */
+        p { margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+
+    <div class="article-container">
+        <div class="breadcrumb">
+            <a href="../index.html">Home</a> / <a href="index.html">Academy</a> / Defensive Dorking
+        </div>
+
+        <article>
+            <h1>Defensive Dorking: How to Audit Your Own Website</h1>
+            <div style="color: #8b949e; margin-bottom: 30px; border-bottom: 1px solid #30363d; padding-bottom: 20px;">
+                Updated: January 5, 2026 • <strong>Blue Team Guide</strong>
+            </div>
+
+            <p>Most security breaches don't start with a complex zero-day exploit. They start with a simple configuration error that exposes sensitive data to the public internet. "Defensive Dorking" is the practice of using Google search operators to audit your own organization.</p>
+
+            <h2>Why Audit Your Own Site?</h2>
+            <p>Google is constantly crawling your website. If you accidentally upload a file containing passwords for just 5 minutes, Google might index it. Even if you delete the file later, it could remain in Google's cache.</p>
+
+            <h2>Step 1: Check Your Digital Footprint</h2>
+            <p>The first step is to see everything Google knows about your domain. Use the <code>site:</code> operator without any other keywords.</p>
+            <p style="background: #161b22; padding: 10px; border-radius: 4px; font-family: monospace;">site:yourdomain.com</p>
+            <p>Scroll through the results. Do you see test pages? Subdomains you thought were private? Old marketing PDFs?</p>
+
+            <h2>Step 2: Hunt for Sensitive Files</h2>
+            <p>As a defender, you should regularly run the same queries an attacker would use. Check for documents that shouldn't be public:</p>
+            <ul>
+                <li><strong>Confidential PDF/DOCX:</strong> <code>site:yourdomain.com filetype:pdf confidential</code></li>
+                <li><strong>Spreadsheets:</strong> <code>site:yourdomain.com filetype:xlsx password</code></li>
+            </ul>
+
+            <h2>Step 3: How to Remove Content from Google</h2>
+            <p>If you find a file that exposes sensitive data, deleting it from your server is not enough. You must:</p>
+            <ol>
+                <li>Delete the file from your server.</li>
+                <li>Verify it returns a <strong>404 Not Found</strong> or <strong>403 Forbidden</strong> error.</li>
+                <li>Use the <strong>Google Search Console Removals Tool</strong> to request the immediate removal of the URL from search results.</li>
+            </ol>
+
+            <h2>Conclusion</h2>
+            <p>Security is a continuous process. We recommend setting up Google Alerts for your own domain combined with keywords like "password" or "confidential" to be notified immediately if sensitive data gets indexed.</p>
+
+        </article>
+        
+        <footer style="margin-top: 50px; text-align: center; font-size: 0.9rem; color: #8b949e;">
+            <p><a href="index.html">Back to Academy</a></p>
+        </footer>
+    </div>
+</body>
+</html>
