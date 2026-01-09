@@ -44,9 +44,8 @@
  
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://www.google-analytics.com">
-
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <link rel="stylesheet" href="style.css">
 
@@ -100,20 +99,6 @@
           "@type": "Answer",
           "text": "No. DorkSearch PRO is 100% client-side, meaning all processing happens in your browser. No data is sent to external servers or stored in any database. Your searches and target domains remain completely private."
         }
-      }, {
-        "@type": "Question",
-        "name": "What can I find using Google Dorks?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "With Google Dorks you can discover: exposed PDF, Excel, and Word documents; configuration files; database backups; admin login panels; directory listings; error logs; .git folders; environment files; and many other sensitive resources that may have been unintentionally exposed to public indexing."
-        }
-      }, {
-        "@type": "Question",
-        "name": "How is this tool different from manual Google searches?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "DorkSearch PRO automates the creation of complex Google Dork queries by combining the proper operators and syntax automatically. Instead of manually typing 'site:example.com filetype:pdf', you simply enter your target domain and click the desired search category. This saves time and ensures proper syntax for effective results."
-        }
       }]
     }
     </script>
@@ -139,11 +124,6 @@
         "position": 3,
         "name": "Execute Search",
         "text": "Click on a specific dork button to generate and execute the Google search query"
-      }, {
-        "@type": "HowToStep",
-        "position": 4,
-        "name": "Analyze Results",
-        "text": "Review the Google search results for exposed files, directories, or potential security issues"
       }]
     }
     </script>
@@ -255,15 +235,39 @@
             </details>
         </section>
 
-        <footer>
-            <p>🛡️ <strong>Disclaimer:</strong> This tool is designed exclusively for ethical security audits, authorized penetration testing, and educational purposes.</p>
-            
-            <p style="margin: 15px 0;">
-                <a href="privacy.html" style="color: #58a6ff; text-decoration: none;">Privacy Policy</a> • 
-                <a href="https://github.com/mitocondria40/OSINT-dork-tool" target="_blank" rel="noopener noreferrer" style="color: #58a6ff; text-decoration: none;">View on GitHub</a>
-            </p>
+        <footer class="site-footer">
+            <div class="footer-container">
+                
+                <div class="footer-section about">
+                    <h3>About DorkSearch PRO</h3>
+                    <p>
+                        We are an Open Source platform dedicated to democratizing <strong>Cybersecurity</strong> and <strong>OSINT</strong>. 
+                        Our mission is to facilitate security audits and ethical pentesting through automated advanced dorks.
+                        <br><br>
+                        <em>"Knowledge is free. Use it responsibly."</em>
+                    </p>
+                </div>
 
-            <p class="copyright">© 2026 DorkSearch PRO - All rights reserved</p>
+                <div class="footer-section contact">
+                    <h3>📩 Contact & Support</h3>
+                    <p>Have a suggestion for a new tool?</p>
+                    <a href="mailto:emploi.contactch@gmail.com" class="contact-btn">
+                        <i class="fas fa-envelope"></i> emploi.contactch@gmail.com
+                    </a>
+                    
+                    <div class="social-links">
+                        <a href="https://github.com/mitocondria40/OSINT-dork-tool" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                    </div>
+                </div>
+
+            </div>
+            
+            <div class="footer-bottom">
+                <p>
+                    © 2026 DorkSearch PRO - All rights reserved. | 
+                    <a href="privacy.html">Privacy Policy</a>
+                </p>
+            </div>
         </footer>
     </div>
 
