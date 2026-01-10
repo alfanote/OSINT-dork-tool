@@ -1,8 +1,3 @@
-/* ==========================================================================
-   DorkSearch PRO - Optimized Stylesheet
-   ========================================================================== */
-
-/* --- CSS Variables --- */
 :root {
     --bg-color: #0d1117;
     --card-bg: #161b22;
@@ -16,7 +11,6 @@
     --warning-color: #d29922;
 }
 
-/* --- Base Styles --- */
 * {
     margin: 0;
     padding: 0;
@@ -43,7 +37,6 @@ body {
     max-width: 1000px;
 }
 
-/* --- Header --- */
 header {
     margin-bottom: 40px;
     text-align: center;
@@ -88,7 +81,6 @@ h3 {
     margin-bottom: 15px;
 }
 
-/* --- Input Section --- */
 .input-section { 
     margin-bottom: 35px;
 }
@@ -138,7 +130,6 @@ input[type="text"]::placeholder {
     box-shadow: 0 0 0 3px rgba(46, 160, 67, 0.3);
 }
 
-/* --- Query Preview Box --- */
 .query-box {
     background: #000;
     border: 2px dashed var(--accent-green);
@@ -197,7 +188,6 @@ input[type="text"]::placeholder {
     transform: scale(1.05);
 }
 
-/* --- Dorks Grid --- */
 .dorks-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -227,7 +217,6 @@ input[type="text"]::placeholder {
     padding-bottom: 8px;
 }
 
-/* --- Buttons --- */
 button {
     width: 100%;
     padding: 13px 16px;
@@ -259,7 +248,6 @@ button:last-child {
     margin-bottom: 0;
 }
 
-/* --- Custom Dork Section --- */
 .custom-dork-section {
     background: var(--card-bg);
     padding: 26px;
@@ -304,7 +292,6 @@ button:last-child {
     text-align: center;
 }
 
-/* --- Info Section --- */
 .info-section {
     background: var(--card-bg);
     padding: 30px;
@@ -342,7 +329,6 @@ button:last-child {
     font-size: 0.95rem;
 }
 
-/* --- FAQ Section --- */
 .faq-section {
     margin-top: 50px;
     border-top: 2px solid var(--border-color);
@@ -416,9 +402,8 @@ details code {
     font-size: 0.9rem;
 }
 
-/* --- Professional Footer (NEW) --- */
 .site-footer {
-    background-color: #0a0a0a; /* Más oscuro que el fondo normal para diferenciar */
+    background-color: #0a0a0a;
     border-top: 2px solid var(--accent-green);
     color: var(--text-muted);
     padding: 50px 20px 30px;
@@ -454,7 +439,6 @@ details code {
     font-size: 0.95rem;
 }
 
-/* Botón de contacto */
 .contact-btn {
     display: inline-flex;
     align-items: center;
@@ -476,7 +460,6 @@ details code {
     box-shadow: 0 0 15px rgba(46, 160, 67, 0.4);
 }
 
-/* Links sociales */
 .social-links {
     margin-top: 25px;
     display: flex;
@@ -497,7 +480,6 @@ details code {
     color: var(--accent-green);
 }
 
-/* Parte inferior copyright */
 .footer-bottom {
     text-align: center;
     margin-top: 50px;
@@ -518,7 +500,6 @@ details code {
     color: var(--accent-green);
 }
 
-/* Adaptación para móviles del Footer */
 @media (max-width: 768px) {
     .footer-container {
         flex-direction: column;
