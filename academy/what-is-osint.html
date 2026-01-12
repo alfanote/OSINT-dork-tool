@@ -3,172 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>What is OSINT? The Ultimate Guide for Beginners (2026) | DorkSearch PRO</title>
-    <meta name="description" content="A comprehensive guide to Open Source Intelligence (OSINT). Learn how to gather public data, use Google Dorks, and conduct ethical passive reconnaissance.">
-    <meta name="keywords" content="OSINT, Open Source Intelligence, Google Dorks, Passive Reconnaissance, Cyber Security, Ethical Hacking">
-    <meta name="author" content="DorkSearch PRO Team">
+    <title>What is OSINT? Ultimate Guide | DorkSearch PRO</title>
     
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../style.css">
     
     <style>
-        /* Estilos específicos para lectura cómoda */
-        body {
-            background-color: #0d1117;
-            color: #c9d1d9;
-            font-family: 'Roboto Mono', monospace;
-            line-height: 1.8;
-        }
-        .article-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-        /* Breadcrumbs navigation */
-        .breadcrumb {
-            margin-bottom: 30px;
-            font-size: 0.9rem;
-            color: #8b949e;
-        }
-        .breadcrumb a {
-            color: #58a6ff;
-            text-decoration: none;
-        }
-        .breadcrumb a:hover { text-decoration: underline; }
+        body { font-family: 'Share Tech Mono', monospace; }
 
-        /* Tipografía del artículo */
-        h1 { font-size: 2.5rem; color: #fff; margin-bottom: 10px; line-height: 1.2; }
-        .meta-info { color: #8b949e; margin-bottom: 40px; border-bottom: 1px solid #30363d; padding-bottom: 20px; }
+        .article-container { max-width: 800px; margin: 0 auto; padding: 40px 20px; position: relative; z-index: 2; }
         
-        h2 { color: #fff; margin-top: 40px; margin-bottom: 20px; border-left: 4px solid #2ea043; padding-left: 15px; }
-        h3 { color: #79c0ff; margin-top: 30px; margin-bottom: 15px; }
-        
-        p { margin-bottom: 20px; font-size: 1.05rem; }
-        
-        /* Cajas de código o notas */
+        .breadcrumb { 
+            color: #666; margin-bottom: 30px; font-size: 0.9rem; 
+            border-bottom: 1px dashed #333; padding-bottom: 10px; text-transform: uppercase; 
+        }
+        .breadcrumb a { color: var(--neon-green, #00ff41); text-decoration: none; }
+
+        h1 { font-size: 2.5rem; color: #fff; margin-bottom: 10px; text-transform: uppercase; }
+        .meta-info { color: #888; margin-bottom: 40px; border-bottom: 1px solid #333; padding-bottom: 20px; }
+        .meta-info strong { color: var(--neon-green, #00ff41); }
+
+        h2 { 
+            color: #fff; margin-top: 50px; margin-bottom: 20px; 
+            border-left: 4px solid var(--neon-green, #00ff41); padding-left: 15px; 
+            text-transform: uppercase; letter-spacing: 1px;
+        }
+
+        p { color: #ccc; margin-bottom: 20px; font-size: 1.1rem; line-height: 1.6; }
+
+        /* NOTA TÉCNICA */
         .note-box {
-            background: #161b22;
-            border: 1px solid #30363d;
+            background: #111;
+            border: 1px solid #333;
+            border-left: 3px solid #ffcc00; /* Amarillo advertencia */
             padding: 20px;
-            border-radius: 6px;
-            margin: 25px 0;
+            margin: 30px 0;
+            color: #ddd;
         }
-        code {
-            background: rgba(110, 118, 129, 0.4);
-            padding: 0.2em 0.4em;
-            border-radius: 6px;
-            font-size: 85%;
-            font-family: 'Courier New', Courier, monospace;
-        }
+        .note-box strong { color: #ffcc00; display: block; margin-bottom: 5px; text-transform: uppercase; }
 
-        /* Call to Action interna */
+        /* CTA BOX */
         .cta-box {
-            background: rgba(46, 160, 67, 0.1);
-            border: 1px solid #2ea043;
+            background: #000;
+            border: 1px solid var(--neon-green, #00ff41);
             padding: 30px;
             text-align: center;
-            border-radius: 8px;
             margin: 50px 0;
+            position: relative;
         }
+        /* Decoración de esquinas en CTA */
+        .cta-box::before { content: ""; position: absolute; top: -1px; left: -1px; width: 10px; height: 10px; border-top: 2px solid var(--neon-green, #00ff41); border-left: 2px solid var(--neon-green, #00ff41); }
+        .cta-box::after { content: ""; position: absolute; bottom: -1px; right: -1px; width: 10px; height: 10px; border-bottom: 2px solid var(--neon-green, #00ff41); border-right: 2px solid var(--neon-green, #00ff41); }
+
         .cta-btn {
             display: inline-block;
-            background: #2ea043;
-            color: #fff;
-            padding: 12px 25px;
-            border-radius: 6px;
+            background: transparent;
+            color: var(--neon-green, #00ff41);
+            border: 1px solid var(--neon-green, #00ff41);
+            padding: 12px 30px;
             text-decoration: none;
             font-weight: bold;
             margin-top: 15px;
-            transition: transform 0.2s;
+            text-transform: uppercase;
+            transition: 0.3s;
         }
-        .cta-btn:hover { transform: scale(1.05); }
+        .cta-btn:hover { background: var(--neon-green, #00ff41); color: #000; }
 
-        ul { margin-bottom: 20px; margin-left: 20px; }
+        ul { margin-left: 20px; color: #ccc; }
         li { margin-bottom: 10px; }
+        li::marker { color: var(--neon-green, #00ff41); }
+
+        /* Code snippets */
+        code { background: #000; border: 1px solid #333; padding: 2px 5px; color: #00ff41; font-family: 'Share Tech Mono', monospace; }
+
     </style>
 </head>
 <body>
 
+    <div class="grid-overlay"></div>
+
     <div class="article-container">
         <div class="breadcrumb">
-            <a href="../index.html">Home</a> / <a href="index.html">Academy</a> / What is OSINT?
+            <a href="../index.html">TOOL</a> / <a href="index.html">ACADEMY</a> / INTEL_BRIEFING
         </div>
 
         <article>
-            <h1>What is OSINT? The Ultimate Guide for Beginners (2026)</h1>
+            <h1>What is OSINT? The Ultimate Guide for Beginners</h1>
             <div class="meta-info">
-                By <strong>DorkSearch Team</strong> • Updated: January 5, 2026 • 8 min read
+                AUTHOR: <strong>DORKSEARCH_TEAM</strong> // READ_TIME: 8_MIN // ID: OSINT_001
             </div>
 
-            <p>In the digital age, information is the new currency. But contrary to popular belief, you don't need to hack into secret government servers to find valuable intelligence. Most of the data security researchers need is hiding in plain sight. This is the world of <strong>Open Source Intelligence (OSINT)</strong>.</p>
+            <p>In the digital age, information is currency. You don't need to hack secret servers to find valuable intelligence. Most data is hiding in plain sight. This is the world of <strong>Open Source Intelligence (OSINT)</strong>.</p>
 
-            <p>Whether you are a bug bounty hunter, a journalist, or a cybersecurity analyst, understanding OSINT is the first step in any investigation. In this guide, we will explore what OSINT is, why it matters, and how you can start using it today.</p>
+            <p>Whether you are a bug bounty hunter or a cybersecurity analyst, understanding OSINT is step one. Here is your briefing.</p>
 
-            <h2>Defining OSINT: More Than Just "Googling"</h2>
-            <p><strong>OSINT</strong> stands for Open Source Intelligence. It refers to the practice of collecting, analyzing, and making decisions based on data accessible in publicly available sources.</p>
-            <p>"Open Source" in this context doesn't mean "Open Source Software" (like Linux). It refers to the nature of the source: it is <em>open</em> to the public. It includes:</p>
+            <h2>>> Defining OSINT</h2>
+            <p><strong>OSINT</strong> refers to the practice of collecting and analyzing data accessible in publicly available sources. "Open Source" here means open to the public.</p>
             <ul>
-                <li><strong>The Surface Web:</strong> Websites, news articles, blogs, and public directories.</li>
-                <li><strong>Social Media:</strong> Twitter (X), LinkedIn, Facebook, Instagram (often called SOCMINT).</li>
-                <li><strong>Public Records:</strong> Government reports, census data, patent filings.</li>
-                <li><strong>Images and Videos:</strong> Metadata, geolocation from photos, and reverse image searching.</li>
+                <li><strong>Surface Web:</strong> News, blogs, public directories.</li>
+                <li><strong>Social Media (SOCMINT):</strong> Twitter, LinkedIn, Facebook.</li>
+                <li><strong>Public Records:</strong> Government reports, patents.</li>
+                <li><strong>Meta Data:</strong> Geolocation from images, EXIF data.</li>
             </ul>
 
             <div class="note-box">
-                <strong>💡 Key Concept:</strong> The difference between OSINT and Hacking is <em>permission</em> and <em>source</em>. OSINT uses data that the target has intentionally or unintentionally published. Hacking involves breaking into systems to access private data.
+                <strong>[!] CRITICAL DISTINCTION:</strong>
+                OSINT uses permission-based public data. Hacking involves breaking into systems to access private data. Know the difference.
             </div>
 
-            <h2>The Intelligence Cycle</h2>
-            <p>Professional analysts don't just randomly search for things. They follow a structured process known as the Intelligence Cycle:</p>
+            <h2>>> The Intelligence Cycle</h2>
+            <p>Analysts follow a structured process:</p>
             <ol>
-                <li><strong>Planning:</strong> Defining what you need to find. (e.g., "I need to find all subdomains of target.com").</li>
-                <li><strong>Collection:</strong> Gathering raw data using tools and search engines.</li>
-                <li><strong>Processing:</strong> Organizing the data (translating, decoding, formatting).</li>
-                <li><strong>Analysis:</strong> Connecting the dots to form a conclusion.</li>
-                <li><strong>Dissemination:</strong> Reporting the findings to the client or team.</li>
+                <li><strong>Planning:</strong> Define the objective.</li>
+                <li><strong>Collection:</strong> Gather raw data.</li>
+                <li><strong>Processing:</strong> Organize and decode.</li>
+                <li><strong>Analysis:</strong> Connect dots to form conclusions.</li>
+                <li><strong>Dissemination:</strong> Report findings.</li>
             </ol>
 
-            <h2>The Power of Google Dorking</h2>
-            <p>One of the most powerful subsets of OSINT is "Google Hacking" or <strong>Google Dorking</strong>. This involves using advanced search operators to filter Google results and find files that shouldn't be public.</p>
+            <h2>>> The Power of Google Dorking</h2>
+            <p>One of the most powerful subsets is <strong>Google Dorking</strong>. It involves using operators to filter results.</p>
             
-            <p>For example, a normal user searches for <code>login page</code>. An OSINT investigator searches for:</p>
-            <p><code>site:example.com inurl:admin filetype:php</code></p>
+            <p>Standard search: <code>login page</code></p>
+            <p>OSINT search: <code>site:example.com inurl:admin filetype:php</code></p>
             
-            <p>This query tells Google: "Show me only PHP files, hosted on example.com, that have the word 'admin' in the URL". This often reveals hidden administrative panels.</p>
+            <p>This query reveals hidden administrative panels by filtering for PHP files with "admin" in the URL.</p>
 
             <div class="cta-box">
-                <h3>🚀 Ready to try Google Dorking?</h3>
-                <p>We have built a free tool that automates this process for you. Don't memorize commands—generate them instantly.</p>
-                <a href="../index.html" class="cta-btn">Use DorkSearch Generator Free</a>
+                <h3>🚀 INITIATE_DORKING_SEQUENCE</h3>
+                <p>We have built a tool to automate this process. Do not memorize commands.</p>
+                <a href="../index.html" class="cta-btn">ACCESS GENERATOR</a>
             </div>
 
-            <h2>Why is OSINT Critical for Cybersecurity?</h2>
-            <p>For <strong>Red Teams</strong> (Attackers) and <strong>Bug Bounty Hunters</strong>, OSINT is the "Reconnaissance" phase. Before attacking a system, you must understand it. OSINT helps you find:</p>
+            <h2>>> Ethical Boundaries</h2>
+            <p>Ethical OSINT has strict protocols:</p>
             <ul>
-                <li><strong>Forgotton Subdomains:</strong> Old development servers (`dev.company.com`) are often less secure.</li>
-                <li><strong>Exposed Credentials:</strong> Developers often accidentally upload API keys to GitHub or Pastebin.</li>
-                <li><strong>Employee Information:</strong> LinkedIn profiles can reveal what technology stack a company uses (e.g., "SQL Administrator at Company X").</li>
+                <li><strong>Passive vs. Active:</strong> OSINT is passive. Port scanning is active (attacking).</li>
+                <li><strong>Privacy:</strong> Respect GDPR/CCPA. Do not dox individuals.</li>
+                <li><strong>Scope:</strong> Stay within bug bounty program policies.</li>
             </ul>
 
-            <h2>Ethical Boundaries: The "Do No Harm" Rule</h2>
-            <p>Just because information is public doesn't mean you can use it maliciously. Ethical OSINT has strict boundaries:</p>
-            <ul>
-                <li><strong>Passive vs. Active:</strong> OSINT is generally <em>passive</em> (you query Google, not the target's server directly). Once you start scanning ports or brute-forcing logins, you are no longer doing OSINT—you are attacking.</li>
-                <li><strong>Privacy:</strong> Respect personal privacy (GDPR/CCPA). Do not doxing individuals.</li>
-                <li><strong>Scope:</strong> If you are bug hunting, stay strictly within the scope defined by the program policy.</li>
-            </ul>
-
-            <h2>Conclusion</h2>
-            <p>OSINT is a mindset. It is the art of seeing what others miss in the ocean of information that surrounds us. Whether you are protecting a company or investigating a news story, mastering open-source intelligence is a superpower in the 21st century.</p>
-            
-            <p>Start small. Use our <a href="../index.html">DorkSearch Tool</a> to explore your own digital footprint and see what the internet knows about you.</p>
+            <p>Start small. Use our tool to explore your own digital footprint.</p>
         </article>
 
-        <footer style="margin-top: 50px; border-top: 1px solid #30363d; padding-top: 20px; font-size: 0.9rem; text-align: center;">
-            <p>© 2026 DorkSearch PRO Academy. All rights reserved.</p>
-            <p><a href="../index.html">Back to Tool</a> • <a href="../privacy.html">Privacy Policy</a></p>
+        <footer style="margin-top: 50px; text-align: center; font-size: 0.9rem; color: #666; border-top: 1px solid #333; padding-top: 20px;">
+            <p><a href="index.html" style="color:#888; text-decoration:none;">&lt; RETURN_TO_BASE</a></p>
         </footer>
-
     </div>
-
 </body>
 </html>
