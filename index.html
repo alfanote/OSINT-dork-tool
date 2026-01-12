@@ -44,9 +44,9 @@
  
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
     <link rel="stylesheet" href="style.css">
 
     <script type="application/ld+json">
@@ -129,22 +129,56 @@
     </script>
 </head>
 <body>
+    <div class="grid-overlay"></div>
+
     <div class="container">
         <header>
-            <h1>Dork<span class="highlight">Search</span>PRO: Google Dorks Generator</h1>
+            <div class="status-bar">
+                <span>SYSTEM: ONLINE</span>
+                <span>SECURE CONNECTION</span>
+                <span>V.2.0.5</span>
+            </div>
+
+            <h1>DORK<span class="highlight">SEARCH</span>PRO</h1>
             
-            <p class="subtitle">Advanced Passive Reconnaissance Tool for OSINT & Security Research</p>
+            <p class="subtitle">ADVANCED PASSIVE RECONNAISSANCE TOOL // OSINT</p>
             <p class="tagline">Generate powerful Google Dorks instantly • 100% Client-Side • Open Source</p>
             
-            <nav style="margin-top: 25px; display: flex; justify-content: center; gap: 25px; font-size: 1.1rem;">
-                <a href="index.html" style="color: #fff; text-decoration: none; border-bottom: 2px solid #2ea043; padding-bottom: 5px; font-weight: 700;">Tool</a>
-                <a href="academy/index.html" style="color: #8b949e; text-decoration: none; padding-bottom: 5px; transition: color 0.3s ease;">🎓 Academy</a>
+            <nav class="main-nav">
+                <a href="index.html" class="active">[ TOOL_ACCESS ]</a>
+                <a href="academy/index.html">[ ACADEMY_DB ]</a>
             </nav>
         </header>
 
         <main>
+            <section class="instructions-panel">
+                <div class="panel-header">/// OPERATIONAL PROTOCOL ///</div>
+                <div class="steps-grid">
+                    <div class="step">
+                        <i class="fas fa-bullseye"></i>
+                        <h4>1. TARGET</h4>
+                        <p>Define domain (e.g. nasa.gov)</p>
+                    </div>
+                    <div class="step">
+                        <i class="fas fa-fingerprint"></i>
+                        <h4>2. PAYLOAD</h4>
+                        <p>Optional: Topic (e.g. "confidential")</p>
+                    </div>
+                    <div class="step">
+                        <i class="fas fa-bolt"></i>
+                        <h4>3. EXECUTE</h4>
+                        <p>Click "SCAN TARGET" to launch</p>
+                    </div>
+                </div>
+            </section>
+
             <section class="input-section" aria-label="Search Configuration">
-                <label for="target">Target Domain or Website:</label>
+                <div class="corner-decor top-left"></div>
+                <div class="corner-decor top-right"></div>
+                <div class="corner-decor bottom-left"></div>
+                <div class="corner-decor bottom-right"></div>
+                
+                <label for="target">>> TARGET DOMAIN (SITE):</label>
                 <div class="input-wrapper">
                     <span class="prefix">site:</span>
                     <input type="text" 
@@ -154,9 +188,24 @@
                            aria-label="Enter target domain">
                 </div>
                 
+                <label for="keyword-input" style="margin-top: 20px; display: block;">>> TARGET TOPIC (INTITLE):</label>
+                <div class="input-wrapper">
+                    <span class="prefix">intitle:</span>
+                    <input type="text" 
+                           id="keyword-input" 
+                           placeholder="dashboard, api_v1, staging, internal..." 
+                           autocomplete="off"
+                           aria-label="Enter search keyword">
+                </div>
+
+                <button onclick="runQuickSearch()" class="scan-btn">
+                    <i class="fas fa-radar"></i> INITIATE FULL SYSTEM SCAN
+                </button>
+                
                 <div id="query-preview" class="query-box hidden">
+                    <span class="query-label">GENERATED_QUERY:</span>
                     <code id="query-text">waiting for input...</code>
-                    <button id="copy-btn" title="Copy command" aria-label="Copy to clipboard">📋 Copy</button>
+                    <button id="copy-btn" title="Copy command" aria-label="Copy to clipboard"><i class="fas fa-copy"></i> COPY</button>
                 </div>
             </section>
 
@@ -164,35 +213,34 @@
                 </section>
 
             <section class="custom-dork-section">
-                <h3>🛠️ Custom Dork Builder</h3>
+                <h3>// MANUAL_OVERRIDE (CUSTOM BUILDER)</h3>
                 <p class="section-description">Create your own custom Google Dork query using advanced operators</p>
                 <div class="custom-input-group">
                     <input type="text" 
                            id="custom-dork-input" 
                            placeholder="Example: inurl:admin filetype:php" 
                            aria-label="Custom Dork Query">
-                    <button onclick="runCustomDork()" aria-label="Execute custom dork">LAUNCH SEARCH</button>
+                    <button onclick="runCustomDork()" aria-label="Execute custom dork">EXECUTE</button>
                 </div>
             </section>
 
             <section class="info-section">
-                <h2>What is Google Dorking?</h2>
-                <p><strong>Google Dorking</strong> (also known as Google Hacking) is an OSINT technique that uses advanced search operators to uncover security vulnerabilities, exposed sensitive files, and misconfigurations in web servers and applications. Security researchers, penetration testers, and cybersecurity professionals use Google Dorks to perform passive reconnaissance and identify potential attack vectors before malicious actors do.</p>
+                <h2>>> SYSTEM_INTEL</h2>
+                <p><strong>Google Dorking</strong> (also known as Google Hacking) is an OSINT technique that uses advanced search operators to uncover security vulnerabilities, exposed sensitive files, and misconfigurations in web servers and applications.</p>
                 
-                <h3>Common Google Dork Operators:</h3>
+                <h3>// KNOWN_OPERATORS:</h3>
                 <ul class="operators-list">
                     <li><code>site:</code> - Limits results to a specific domain or website</li>
-                    <li><code>filetype:</code> - Searches for specific file extensions (pdf, doc, xls, sql, etc.)</li>
+                    <li><code>filetype:</code> - Searches for specific file extensions</li>
                     <li><code>inurl:</code> - Finds pages with specific terms in the URL</li>
                     <li><code>intitle:</code> - Searches for specific words in page titles</li>
                     <li><code>intext:</code> - Looks for specific text within page content</li>
-                    <li><code>cache:</code> - Shows Google's cached version of a page</li>
                 </ul>
             </section>
         </main>
 
         <section class="faq-section">
-            <h2>Frequently Asked Questions (FAQ)</h2>
+            <h2>>> FREQUENTLY_ASKED_QUESTIONS</h2>
             
             <details>
                 <summary>What are Google Dorks and how do they work?</summary>
@@ -205,7 +253,7 @@
             </details>
 
             <details>
-                <summary>Does DorkSearch PRO store my search data or target domains?</summary>
+                <summary>Does DorkSearch PRO store my search data?</summary>
                 <p>No. DorkSearch PRO is <strong>100% client-side</strong>, meaning all processing happens in your browser. No data is sent to external servers or stored in any database. Your searches and target domains remain completely private. You can verify this by inspecting the open-source code on GitHub.</p>
             </details>
 
@@ -215,7 +263,7 @@
             </details>
 
             <details>
-                <summary>How is this tool different from manual Google searches?</summary>
+                <summary>How is this tool different from manual searches?</summary>
                 <p>DorkSearch PRO automates the creation of complex Google Dork queries by combining the proper operators and syntax automatically. Instead of manually typing <code>site:example.com filetype:pdf</code>, you simply enter your target domain and click the desired search category. This saves time and ensures proper syntax for effective results.</p>
             </details>
 
@@ -237,35 +285,31 @@
 
         <footer class="site-footer">
             <div class="footer-container">
-                
                 <div class="footer-section about">
-                    <h3>About DorkSearch PRO</h3>
+                    <h3>// ABOUT_SYSTEM</h3>
                     <p>
                         We are an Open Source platform dedicated to democratizing <strong>Cybersecurity</strong> and <strong>OSINT</strong>. 
-                        Our mission is to facilitate security audits and ethical pentesting through automated advanced dorks.
                         <br><br>
                         <em>"Knowledge is free. Use it responsibly."</em>
                     </p>
                 </div>
 
                 <div class="footer-section contact">
-                    <h3>📩 Contact & Support</h3>
-                    <p>Have a suggestion for a new tool?</p>
+                    <h3>// COMM_LINK</h3>
+                    <p>Have a suggestion?</p>
                     <a href="mailto:emploi.contactch@gmail.com" class="contact-btn">
                         <i class="fas fa-envelope"></i> emploi.contactch@gmail.com
                     </a>
                     
                     <div class="social-links">
-                        <a href="https://github.com/mitocondria40/OSINT-dork-tool" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                        <a href="https://github.com/mitocondria40/OSINT-dork-tool" target="_blank"><i class="fab fa-github"></i> GitHub_Repo</a>
                     </div>
                 </div>
-
             </div>
             
             <div class="footer-bottom">
                 <p>
-                    © 2026 DorkSearch PRO - All rights reserved. | 
-                    <a href="privacy.html">Privacy Policy</a>
+                    © 2026 DorkSearch PRO | <a href="privacy.html">PRIVACY_PROTOCOL</a>
                 </p>
             </div>
         </footer>
