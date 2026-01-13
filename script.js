@@ -1,9 +1,10 @@
 /* =========================================
-   DATABASE: DORK CATEGORIES
+   DATABASE: DORK CATEGORIES (FULL RESTORED)
    ========================================= */
 const dorksData = [
   {
-    category: " Files & Documents",
+    category: "Files & Documents",
+    icon: "fa-file-alt",
     items: [
       { label: "Public PDFs", dork: "filetype:pdf" },
       { label: "Excel Data", dork: "filetype:xls OR filetype:xlsx OR filetype:csv" },
@@ -15,7 +16,8 @@ const dorksData = [
     ]
   },
   {
-    category: " Server & Config",
+    category: "Server & Config",
+    icon: "fa-server",
     items: [
       { label: "Directory Listing", dork: "intitle:\"index of\"" },
       { label: "Config Files", dork: "filetype:xml OR filetype:conf OR filetype:cnf OR filetype:ini OR filetype:env" },
@@ -27,7 +29,8 @@ const dorksData = [
     ]
   },
   {
-    category: " Bug Bounty & Vulnerabilities",
+    category: "Bug Bounty & Vulnerabilities",
+    icon: "fa-bug",
     items: [
       { label: "Open Redirect", dork: "inurl:redir OR inurl:redirect= OR inurl:return= OR inurl:next=" },
       { label: "XSS Parameters", dork: "inurl:q= OR inurl:search= OR inurl:s= OR inurl:lang=" },
@@ -40,7 +43,8 @@ const dorksData = [
     ]
   },
   {
-    category: " Cloud & DevOps",
+    category: "Cloud & DevOps",
+    icon: "fa-cloud",
     items: [
       { label: "AWS S3 Buckets", dork: "intext:\"s3.amazonaws.com\"" },
       { label: "Azure Blob Storage", dork: "inurl:blob.core.windows.net" },
@@ -52,7 +56,8 @@ const dorksData = [
     ]
   },
   {
-    category: " Databases & Backups",
+    category: "Databases & Backups",
+    icon: "fa-database",
     items: [
       { label: "SQL Dumps", dork: "filetype:sql intext:\"CREATE TABLE\"" },
       { label: "Database Backups", dork: "filetype:bak OR filetype:dump" },
@@ -63,7 +68,8 @@ const dorksData = [
     ]
   },
   {
-    category: " Credentials & Secrets",
+    category: "Credentials & Secrets",
+    icon: "fa-key",
     items: [
       { label: "API Keys", dork: "intext:\"api_key\" OR intext:\"client_secret\"" },
       { label: "AWS Keys", dork: "intext:\"AKIA\" OR intext:\"aws_access_key_id\"" },
@@ -74,7 +80,8 @@ const dorksData = [
     ]
   },
   {
-    category: " Source Code & Leaks",
+    category: "Source Code & Leaks",
+    icon: "fa-code",
     items: [
       { label: "Exposed Source Code", dork: "filetype:php OR filetype:js OR filetype:py OR filetype:java" },
       { label: "Backup Source Files", dork: "filetype:old OR filetype:bak OR filetype:swp" },
@@ -83,7 +90,8 @@ const dorksData = [
     ]
   },
   {
-    category: " Debug & Dev Environments",
+    category: "Debug & Dev Environments",
+    icon: "fa-laptop-code",
     items: [
       { label: "Debug Enabled", dork: "APP_DEBUG=true OR debug=true" },
       { label: "Test / Dev Sites", dork: "inurl:test OR inurl:dev OR inurl:staging" },
@@ -92,7 +100,8 @@ const dorksData = [
     ]
   },
   {
-    category: " Network & Infrastructure",
+    category: "Network & Infrastructure",
+    icon: "fa-network-wired",
     items: [
       { label: "Open Web Ports", dork: "inurl:8080 OR inurl:8443 OR inurl:9200" },
       { label: "Elasticsearch", dork: "intitle:\"You Know, for Search\"" },
@@ -101,7 +110,8 @@ const dorksData = [
     ]
   },
   {
-    category: " People & Identity OSINT",
+    category: "People & Identity OSINT",
+    icon: "fa-user-secret",
     items: [
       { label: "Employee Lists", dork: "filetype:xls intext:employee" },
       { label: "Phone Directories", dork: "filetype:pdf intext:\"phone directory\"" },
@@ -110,7 +120,8 @@ const dorksData = [
     ]
   },
   {
-    category: " OSINT & Recon",
+    category: "OSINT & Recon",
+    icon: "fa-eye",
     items: [
       { label: "Subdomains", dork: "-www" },
       { label: "Wayback Machine", dork: "site:web.archive.org" },
@@ -120,7 +131,8 @@ const dorksData = [
     ]
   },
   {
-    category: " Advanced Operators",
+    category: "Advanced Operators",
+    icon: "fa-search-plus",
     items: [
       { label: "Cached Pages", dork: "cache:" },
       { label: "Related Sites", dork: "related:" },
@@ -130,7 +142,8 @@ const dorksData = [
     ]
   },
   {
-    category: " Breach & Incident Intelligence",
+    category: "Breach & Incident Intelligence",
+    icon: "fa-skull-crossbones",
     items: [
       { label: "Data Breach Reports", dork: "intext:\"data breach\"" },
       { label: "Ransomware Victims", dork: "intext:ransomware filetype:pdf" },
@@ -140,281 +153,215 @@ const dorksData = [
 ];
 
 /* =========================================
-   INITIALIZATION
+   INITIALIZATION & DOM ELEMENTS
    ========================================= */
+const targetInput = document.getElementById('target');
+const keywordInput = document.getElementById('keyword-input');
+const dorksContainer = document.getElementById('dorks-container');
+const queryText = document.getElementById('query-text');
+const queryPreview = document.getElementById('query-preview');
+const customDorkInput = document.getElementById('custom-dork-input');
+
 document.addEventListener('DOMContentLoaded', () => {
-  renderButtons();
+  renderDorks();
   setupEventListeners();
-  setupAccessibility();
 });
 
-function renderButtons() {
-  const container = document.getElementById('dorks-container');
-  
-  if (!container) {
-    console.error('Dorks container not found');
-    return;
-  }
-  
-  container.innerHTML = ''; // Limpiar contenedor
+/* =========================================
+   RENDER LOGIC (Generates the Cards)
+   ========================================= */
+function renderDorks() {
+  if (!dorksContainer) return;
+  dorksContainer.innerHTML = ''; // Clean container
   
   dorksData.forEach(category => {
-    // Crear tarjeta de categoría
+    // Create Card
     const card = document.createElement('div');
     card.className = 'card';
-    card.setAttribute('role', 'region');
-    card.setAttribute('aria-label', category.category);
     
-    // Título de la categoría
-    const title = document.createElement('h3');
-    title.textContent = category.category;
-    card.appendChild(title);
+    // Determine Icon (Fallback if not in data)
+    const iconClass = category.icon || 'fa-terminal';
 
-    // Botones de la categoría
+    // Header
+    const header = document.createElement('h3');
+    header.innerHTML = `<i class="fas ${iconClass}"></i> ${category.category}`;
+    card.appendChild(header);
+
+    // Generate Buttons
     category.items.forEach(item => {
       const btn = document.createElement('button');
       btn.textContent = item.label;
-      btn.setAttribute('aria-label', `Search for ${item.label}`);
-      btn.setAttribute('data-dork', item.dork);
-      // Asignar función de búsqueda al click
-      btn.onclick = () => updateAndSearch(item.dork);
+      // Note: We escape single quotes in the dork string just in case
+      const safeDork = item.dork.replace(/'/g, "\\'");
+      btn.onclick = () => executeSpecificDork(safeDork);
       card.appendChild(btn);
     });
 
-    container.appendChild(card);
+    dorksContainer.appendChild(card);
   });
 }
 
 function setupEventListeners() {
-  const targetInput = document.getElementById('target');
-  const customInput = document.getElementById('custom-dork-input');
-  const keywordInput = document.getElementById('keyword-input');
-  
-  // Permitir buscar con ENTER en los inputs
-  if (customInput) {
-    customInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') runCustomDork();
-    });
-  }
+    // Allow Enter key to trigger searches
+    if(targetInput) {
+        targetInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') runQuickSearch();
+        });
+        // Auto-clean domain on blur
+        targetInput.addEventListener('blur', () => {
+            if(targetInput.value) targetInput.value = cleanDomain(targetInput.value);
+        });
+    }
+    
+    if(keywordInput) {
+        keywordInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') runQuickSearch();
+        });
+    }
 
-  if (keywordInput) {
-    keywordInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') runQuickSearch();
-    });
-  }
-  
-  // Limpieza automática del dominio al salir del input
-  if (targetInput) {
-    targetInput.addEventListener('blur', () => {
-      const value = targetInput.value.trim();
-      if (value) {
-        targetInput.value = cleanDomain(value);
-      }
-    });
-  }
-}
-
-function setupAccessibility() {
-  if (!document.getElementById('aria-live-region')) {
-    const liveRegion = document.createElement('div');
-    liveRegion.setAttribute('aria-live', 'polite');
-    liveRegion.setAttribute('aria-atomic', 'true');
-    liveRegion.className = 'sr-only'; // Clase para ocultar visualmente pero disponible para lectores
-    liveRegion.id = 'aria-live-region';
-    document.body.appendChild(liveRegion);
-  }
+    if(customDorkInput) {
+        customDorkInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') runCustomDork();
+        });
+    }
 }
 
 /* =========================================
-   CORE SEARCH LOGIC
+   SEARCH EXECUTION FUNCTIONS
    ========================================= */
 
 /**
- * Función principal para los botones de dorks específicos (PDF, Config, etc.)
- * Combina: Site + Dork + Keyword (Opcional)
- */
-function updateAndSearch(dorkQuery) {
-  const targetInput = document.getElementById('target');
-  const keywordInput = document.getElementById('keyword-input');
-  
-  let domain = targetInput.value.trim();
-  let keyword = keywordInput ? keywordInput.value.trim() : "";
-
-  // Validación de dominio
-  if (!domain) {
-    showNotification('⚠️ Error: Please enter a target domain first.', 'error');
-    targetInput.focus();
-    return;
-  }
-
-  domain = cleanDomain(domain);
-  
-  if (!isValidDomain(domain)) {
-    showNotification('⚠️ Invalid domain format. Please enter a valid domain (e.g., example.com)', 'error');
-    targetInput.focus();
-    return;
-  }
-  
-  targetInput.value = domain; // Actualizar input con versión limpia
-
-  // Construcción de la Query
-  let fullQuery = "";
-  
-  // Lógica site:
-  if (dorkQuery.startsWith("site:")) {
-    fullQuery = `${dorkQuery} "${domain}"`;
-  } else {
-    fullQuery = `site:${domain} ${dorkQuery}`;
-  }
-
-  // Lógica Keyword (Nuevo: Añade el tema si existe)
-  if (keyword) {
-      fullQuery += ` intitle:"${keyword}"`;
-  }
-
-  updateQueryPreview(fullQuery);
-  executeSearch(fullQuery);
-  
-  announceToScreenReader(`Searching for ${dorkQuery} on ${domain}`);
-}
-
-/**
- * NUEVA FUNCIÓN: Búsqueda rápida (Botón Grande)
- * Busca solo site + keyword, sin especificar tipo de archivo
+ * 1. Quick Scan (The big button)
+ * Searches Site + Keyword + Generic terms
  */
 function runQuickSearch() {
-  const targetInput = document.getElementById('target');
-  const keywordInput = document.getElementById('keyword-input');
+  let domain = getCleanDomain();
+  if (!domain) return;
 
-  let domain = targetInput.value.trim();
-  let keyword = keywordInput ? keywordInput.value.trim() : "";
-
-  if (!domain) {
-    showNotification('⚠️ Error: Please enter a target domain first.', 'error');
-    targetInput.focus();
-    return;
-  }
-
-  domain = cleanDomain(domain);
-  targetInput.value = domain;
-
+  const keyword = keywordInput.value.trim();
+  
   // Base query
-  let fullQuery = `site:${domain}`;
-
-  // Si hay keyword, la añadimos. Si no, busca todo el sitio.
+  let query = `site:${domain}`;
+  
   if (keyword) {
-      fullQuery += ` intitle:"${keyword}"`;
+    query += ` intitle:"${keyword}"`;
+  } else {
+      // Default to finding interesting stuff if no keyword
+      query += ` (intitle:index.of OR inurl:admin OR inurl:login OR inurl:dashboard)`;
   }
 
-  updateQueryPreview(fullQuery);
-  executeSearch(fullQuery);
+  updatePreview(query);
+  openGoogle(query);
 }
 
 /**
- * Función para el input de Dork Personalizado (Custom Builder)
+ * 2. Specific Dork (Clicking a button in the grid)
+ * Searches Site + Keyword + Specific Dork
  */
-function runCustomDork() {
-  const customInput = document.getElementById('custom-dork-input');
-  const customDork = customInput.value.trim();
+function executeSpecificDork(dorkCode) {
+  let domain = getCleanDomain();
+  if (!domain) return;
+
+  const keyword = keywordInput.value.trim();
   
-  if (!customDork) {
-    showNotification('Please enter a custom dork query.', 'warning');
-    customInput.focus();
-    return;
+  let finalQuery = "";
+
+  // Handle special cases where dork already has "site:"
+  if (dorkCode.includes("site:")) {
+      // If the dork is like "site:web.archive.org", we don't use the user's target domain usually,
+      // OR we append the user's domain to the search.
+      // For Wayback machine, we want: site:web.archive.org "target.com"
+      if(dorkCode.includes("web.archive.org")) {
+          finalQuery = `${dorkCode} "${domain}"`;
+      } else {
+          finalQuery = `${dorkCode} ${domain}`; 
+      }
+  } else {
+      // Standard Behavior
+      finalQuery = `site:${domain}`;
+      if (keyword) finalQuery += ` intitle:"${keyword}"`;
+      finalQuery += ` ${dorkCode}`;
   }
 
-  // Si el usuario ya escribió "site:", lo usamos tal cual.
-  // Si no, asumimos que quiere usar la lógica normal (Domain + Custom)
-  if (customDork.includes('site:')) {
-    executeSearch(customDork);
-    updateQueryPreview(customDork);
-  } else {
-    updateAndSearch(customDork);
+  updatePreview(finalQuery);
+  openGoogle(finalQuery);
+}
+
+/**
+ * 3. Custom Dork (Manual Input)
+ */
+function runCustomDork() {
+  let customQuery = customDorkInput.value.trim();
+  if (!customQuery) return;
+
+  const domain = targetInput.value.trim(); // Raw value to check if empty
+  
+  // Smart merge: If user didn't type "site:" but has a domain set, add it.
+  if (domain && !customQuery.includes('site:')) {
+      const clean = cleanDomain(domain);
+      customQuery = `site:${clean} ${customQuery}`;
   }
+
+  updatePreview(customQuery);
+  openGoogle(customQuery);
 }
 
 /* =========================================
-   HELPER FUNCTIONS
+   UTILITIES
    ========================================= */
 
+function getCleanDomain() {
+    const raw = targetInput.value.trim();
+    if (!raw) {
+        alert(">> SYSTEM ERROR: Please enter a Target Domain first.");
+        targetInput.focus();
+        targetInput.style.borderColor = "var(--neon-green)";
+        setTimeout(() => targetInput.style.borderColor = "#333", 2000);
+        return null;
+    }
+    const clean = cleanDomain(raw);
+    targetInput.value = clean; // Update UI with clean version
+    return clean;
+}
+
 function cleanDomain(domain) {
-  // Eliminar protocolo (http/https) y www
-  domain = domain.replace(/^(https?:\/\/)?(www\.)?/, '');
-  // Eliminar rutas después del dominio (ej: .com/pagina -> .com)
-  domain = domain.replace(/\/.*$/, '');
-  // Eliminar puntos finales
-  domain = domain.replace(/\.$/, '');
-  
-  return domain.toLowerCase();
+  // Remove http/https and www
+  return domain
+    .replace(/^(https?:\/\/)?(www\.)?/, '')
+    .replace(/\/.*$/, '') // Remove path
+    .replace(/\.$/, '')   // Remove trailing dot
+    .toLowerCase();
 }
 
-function isValidDomain(domain) {
-  // Regex simple para validar dominios
-  const domainRegex = /^[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,}$/i;
-  return domainRegex.test(domain);
+function updatePreview(query) {
+    if(queryPreview) queryPreview.classList.remove('hidden');
+    if(queryText) queryText.textContent = query;
 }
 
-function updateQueryPreview(query) {
-  const previewBox = document.getElementById('query-preview');
-  const queryText = document.getElementById('query-text');
-  
-  if (!previewBox || !queryText) return;
-  
-  previewBox.classList.remove('hidden');
-  queryText.textContent = query;
-
-  setupCopyButton(query);
+function openGoogle(query) {
+    window.open(`https://www.google.com/search?q=${encodeURIComponent(query)}`, '_blank');
 }
 
-function setupCopyButton(text) {
-  const copyBtn = document.getElementById('copy-btn');
-  
-  if (!copyBtn) return;
-  
-  // Clonar botón para eliminar eventos anteriores
-  const newBtn = copyBtn.cloneNode(true);
-  copyBtn.parentNode.replaceChild(newBtn, copyBtn);
-  
-  newBtn.onclick = () => {
-    navigator.clipboard.writeText(text).then(() => {
-      const originalText = newBtn.textContent;
-      newBtn.textContent = '✓ Copied!';
-      newBtn.style.backgroundColor = 'var(--accent-green)';
-      
-      setTimeout(() => {
-        newBtn.textContent = originalText;
-        newBtn.style.backgroundColor = '';
-      }, 2000);
-      
-      announceToScreenReader('Query copied to clipboard');
-    }).catch(err => {
-      console.error('Failed to copy:', err);
-      showNotification('Failed to copy to clipboard', 'error');
+// Copy Button Logic
+const copyBtn = document.getElementById('copy-btn');
+if(copyBtn) {
+    copyBtn.addEventListener('click', () => {
+        const text = queryText.textContent;
+        if(text === 'waiting for input...') return;
+        
+        navigator.clipboard.writeText(text).then(() => {
+            const originalHTML = copyBtn.innerHTML;
+            
+            // Visual feedback
+            copyBtn.innerHTML = '<i class="fas fa-check"></i> COPIED';
+            copyBtn.style.color = '#fff';
+            copyBtn.style.borderColor = '#fff';
+            
+            setTimeout(() => {
+                copyBtn.innerHTML = originalHTML;
+                copyBtn.style.color = ''; // Revert to CSS default
+                copyBtn.style.borderColor = '';
+            }, 2000);
+        });
     });
-  };
 }
-
-function executeSearch(query) {
-  const googleUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
-  window.open(googleUrl, '_blank');
-}
-
-function showNotification(message, type = 'info') {
-  alert(message); // Por ahora usamos alert nativo
-  announceToScreenReader(message);
-}
-
-function announceToScreenReader(message) {
-  const liveRegion = document.getElementById('aria-live-region');
-  if (liveRegion) {
-    liveRegion.textContent = message;
-    setTimeout(() => {
-      liveRegion.textContent = '';
-    }, 1000);
-  }
-}
-
-// Exponer funciones globales al objeto window para que funcionen con onclick="" en HTML
-window.updateAndSearch = updateAndSearch;
-window.runQuickSearch = runQuickSearch;
-window.runCustomDork = runCustomDork;
