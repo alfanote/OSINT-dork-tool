@@ -225,17 +225,38 @@
             </section>
 
             <section class="info-section">
-                <h2>>> SYSTEM_INTEL</h2>
-                <p><strong>Google Dorking</strong> (also known as Google Hacking) is an OSINT technique that uses advanced search operators to uncover security vulnerabilities, exposed sensitive files, and misconfigurations in web servers and applications.</p>
+                <h2>>> SYSTEM_DOCUMENTATION & INTELLIGENCE</h2>
                 
-                <h3>// KNOWN_OPERATORS:</h3>
-                <ul class="operators-list">
-                    <li><code>site:</code> - Limits results to a specific domain or website</li>
-                    <li><code>filetype:</code> - Searches for specific file extensions</li>
-                    <li><code>inurl:</code> - Finds pages with specific terms in the URL</li>
-                    <li><code>intitle:</code> - Searches for specific words in page titles</li>
-                    <li><code>intext:</code> - Looks for specific text within page content</li>
-                </ul>
+                <div class="content-block" style="margin-bottom: 30px;">
+                    <h3>// 01. WHAT_IS_GOOGLE_DORKING?</h3>
+                    <p><strong>Google Dorking</strong>, professionally known as <em>Google Hacking</em>, is an advanced Open Source Intelligence (OSINT) technique used by security researchers, penetration testers, and journalists. It involves using specialized search operators (advanced queries) to filter and locate specific information that has been indexed by Google but is not easily visible through standard searches.</p>
+                    <p>While standard users search for keywords, a Dorker uses operators to ask the database specific questions, such as: <em>"Show me all PDF files on this government website"</em> or <em>"List all configuration files exposed on this server."</em></p>
+                </div>
+
+                <div class="content-block" style="margin-bottom: 30px;">
+                    <h3>// 02. CRITICAL_OPERATORS_SYNTAX</h3>
+                    <p>Mastering the syntax is crucial for effective reconnaissance. DorkSearch PRO automates this, but understanding the logic is essential for manual verification:</p>
+                    <ul class="operators-list">
+                        <li><code>site:</code> <strong>[Scope Definition]</strong> Restricts results to a specific domain (e.g., <code>site:harvard.edu</code>). This is the primary filter to avoid noise from the rest of the internet.</li>
+                        <li><code>filetype:</code> <strong>[Extension Targeting]</strong> Searches for specific file extensions. Common targets include <code>pdf</code> (documents), <code>xls/xlsx</code> (excel data), <code>conf/xml</code> (server configurations), and <code>sql</code> (database dumps).</li>
+                        <li><code>inurl:</code> <strong>https://en.wikipedia.org/wiki/Pattern_matching</strong> Looks for strings inside the URL itself. Extremely useful for finding admin panels (e.g., <code>inurl:admin</code>, <code>inurl:login</code>) or specific directories.</li>
+                        <li><code>intitle:</code> <strong>[Page Title Search]</strong> Searches for words in the HTML title tag. This is highly effective for finding directory listings (e.g., <code>intitle:"index of"</code>).</li>
+                        <li><code>intext:</code> <strong>[Body Content Search]</strong> Scans the body text of the page. Useful for finding specific error messages or leaked credentials inside a file.</li>
+                    </ul>
+                </div>
+
+                <div class="content-block" style="margin-bottom: 30px;">
+                    <h3>// 03. USE_CASES & ETHICAL_PROTOCOL</h3>
+                    <p>DorkSearch PRO is designed for defensive and educational purposes. The primary use cases include:</p>
+                    <ul>
+                        <li><strong>Self-Audit:</strong> checking your own organization to ensure no sensitive files (invoices, client lists) are publicly indexed.</li>
+                        <li><strong>Bug Bounty Hunting:</strong> Identifying vulnerabilities in scope for authorized bounty programs.</li>
+                        <li><strong>OSINT Research:</strong> Gathering publicly available information for journalism or academic research.</li>
+                    </ul>
+                    <p style="border-left: 3px solid #ff0041; padding-left: 15px; margin-top: 15px; color: #aaa;">
+                        <strong>⚠️ LEGAL DISCLAIMER:</strong> Google Dorking utilizes public search tools and is legal. However, using these results to access, download, or exploit private data without authorization is illegal and punishable under computer crime laws (e.g., CFAA in the US). Always operate within legal boundaries.
+                    </p>
+                </div>
             </section>
         </main>
 
@@ -243,43 +264,23 @@
             <h2>>> FREQUENTLY_ASKED_QUESTIONS</h2>
             
             <details>
-                <summary>What are Google Dorks and how do they work?</summary>
-                <p><strong>Google Dorks</strong> are advanced search operators that allow security researchers and penetration testers to discover information exposed on the internet that isn't easily accessible through standard searches. They use special commands like <code>filetype:</code>, <code>inurl:</code>, <code>site:</code>, and <code>intitle:</code> to filter Google results and find sensitive files, admin panels, configuration files, and potential security vulnerabilities.</p>
+                <summary>Is this tool essentially a Google Hacking Database (GHDB)?</summary>
+                <p>DorkSearch PRO functions as a dynamic interface for the concepts found in the GHDB (Exploit-DB). Instead of manually copying and pasting dorks, our system builds them algorithmically based on your target input, ensuring syntax accuracy and saving time during the reconnaissance phase.</p>
             </details>
 
             <details>
-                <summary>Is it legal to use Google Dorking tools?</summary>
-                <p>Yes, using Google Dorks and dorking tools is completely legal as they only utilize public Google search operators to find publicly indexed information. However, accessing or exploiting private systems without authorization is illegal. This tool should only be used for authorized security audits, ethical penetration testing, OSINT research, or educational purposes.</p>
+                <summary>Why do I see "403 Forbidden" or CAPTCHAs?</summary>
+                <p>Google employs automated systems to detect automated queries. If you execute too many dorks rapidly, Google may temporarily flag your IP. This is a standard defense mechanism. To bypass this, solve the CAPTCHA manually or wait a few minutes before continuing your scan.</p>
             </details>
 
             <details>
-                <summary>Does DorkSearch PRO store my search data?</summary>
-                <p>No. DorkSearch PRO is <strong>100% client-side</strong>, meaning all processing happens in your browser. No data is sent to external servers or stored in any database. Your searches and target domains remain completely private. You can verify this by inspecting the open-source code on GitHub.</p>
+                <summary>Can DorkSearch PRO scan the deep web?</summary>
+                <p>No. This tool interacts exclusively with the Surface Web (indexed content). It queries Google's public index. It does not access the dark web, onion networks, or non-indexed databases.</p>
             </details>
 
             <details>
-                <summary>What can I find using Google Dorks?</summary>
-                <p>With Google Dorks you can discover: exposed PDF, Excel, and Word documents; configuration files (.xml, .conf, .env); database backups (.sql, .bak); admin login panels; directory listings; error logs; .git folders; environment files; and many other sensitive resources that may have been unintentionally exposed to public indexing.</p>
-            </details>
-
-            <details>
-                <summary>How is this tool different from manual searches?</summary>
-                <p>DorkSearch PRO automates the creation of complex Google Dork queries by combining the proper operators and syntax automatically. Instead of manually typing <code>site:example.com filetype:pdf</code>, you simply enter your target domain and click the desired search category. This saves time and ensures proper syntax for effective results.</p>
-            </details>
-
-            <details>
-                <summary>Can I use this for bug bounty programs?</summary>
-                <p>Absolutely! Google Dorking is a fundamental reconnaissance technique in bug bounty hunting. DorkSearch PRO helps you quickly identify potentially vulnerable endpoints, exposed sensitive files, and misconfigured resources on your target domains. Always ensure you have proper authorization before testing.</p>
-            </details>
-
-            <details>
-                <summary>What is the Google Hacking Database (GHDB)?</summary>
-                <p>The <strong>Google Hacking Database (GHDB)</strong> is a comprehensive repository of Google Dorks compiled by security researchers. It categorizes dorks by vulnerability type and attack vector. DorkSearch PRO implements many common GHDB patterns while providing an intuitive interface for custom searches.</p>
-            </details>
-
-            <details>
-                <summary>Is DorkSearch PRO open source?</summary>
-                <p>Yes! DorkSearch PRO is completely open source. You can review, fork, and contribute to the code on GitHub. The entire application runs client-side with vanilla JavaScript, HTML, and CSS—no frameworks, no trackers, no hidden code.</p>
+                <summary>How can I protect my website from Dorking?</summary>
+                <p>To prevent your files from being "dorked," you should use a <code>robots.txt</code> file to disallow sensitive directories from indexing. Additionally, ensure proper server permissions (chmod) are set so that configuration files and directories are not publicly readable, and use password protection (.htaccess) for sensitive areas.</p>
             </details>
         </section>
 
