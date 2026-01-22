@@ -109,21 +109,27 @@ h1 {
     margin-top: 5px;
 }
 
+/* NAVEGACIÓN PRINCIPAL */
 .main-nav {
     margin-top: 25px;
     display: flex;
     justify-content: center;
     gap: 30px;
+    flex-wrap: wrap; /* Permite que los botones bajen si no caben */
 }
 
 .main-nav a {
     color: var(--text-dim);
     font-size: 1.1rem;
+    padding: 5px 10px; /* Añadido un poco de padding para la zona de click */
+    border: 1px solid transparent; /* Reserva espacio para el borde */
 }
 
 .main-nav a.active, .main-nav a:hover {
     color: var(--neon-green);
     text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+    border-color: rgba(0, 255, 65, 0.2); /* Borde sutil al pasar el mouse */
+    background: rgba(0, 255, 65, 0.05); /* Fondo muy sutil */
 }
 
 /* =========================================
@@ -486,12 +492,30 @@ details p { padding: 0 15px 15px; color: var(--text-dim); line-height: 1.6; }
 }
 
 /* =========================================
-   RESPONSIVE DESIGN (MOBILE)
+   RESPONSIVE DESIGN (MOBILE FIX)
    ========================================= */
 @media (max-width: 768px) {
     .container { padding: 10px; }
     
-    h1 { font-size: 2.2rem; }
+    .status-bar {
+        font-size: 0.7rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    h1 { font-size: 2.2rem; margin-top: 5px; }
+    
+    /* CORRECCIÓN MENÚ MÓVIL */
+    .main-nav {
+        gap: 6px;
+        flex-wrap: wrap;
+    }
+    .main-nav a {
+        font-size: 0.8rem;
+        padding: 6px 10px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid #333;
+    }
     
     .steps-grid { grid-template-columns: 1fr; }
     .step { 
