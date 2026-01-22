@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="ezoic-site-verification" content="MXLwpOOqjK7v2s9RwX86lfDlXzYlaO" />
+
+    <script data-cfasync="false" src="https://cmp.gatekeeperconsent.com/min.js"></script>
+    <script data-cfasync="false" src="https://the.gatekeeperconsent.com/cmp.min.js"></script>
+
+    <script async src="//www.ezojs.com/ezoic/sa.min.js"></script>
+    <script>
+      window.ezstandalone = window.ezstandalone || {};
+      ezstandalone.cmd = ezstandalone.cmd || [];
+    </script>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MHWF85ZZ24"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-MHWF85ZZ24');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EXIF Metadata Viewer & GPS Tracker | DorkSearch PRO</title>
+    <meta name="description" content="Free online EXIF viewer. Extract hidden metadata from images: GPS coordinates, camera details, date, and software info. 100% Client-side.">
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* ESTILOS ESPECÍFICOS PARA LA HERRAMIENTA EXIF */
+        .upload-area {
+            border: 2px dashed #333;
+            background: rgba(0, 255, 65, 0.02);
+            padding: 40px;
+            text-align: center;
+            margin: 20px 0;
+            cursor: pointer;
+            transition: 0.3s;
+            position: relative;
+        }
+        .upload-area:hover {
+            border-color: var(--neon-green, #00ff41);
+            background: rgba(0, 255, 65, 0.05);
+        }
+        .upload-icon { font-size: 3em; color: var(--neon-green, #00ff41); margin-bottom: 15px; }
+        
+        #file-input { display: none; }
+
+        .results-container { display: none; margin-top: 30px; animation: fadeIn 0.5s ease; }
+        
+        .data-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        @media (max-width: 768px) { .data-grid { grid-template-columns: 1fr; } }
+
+        .image-preview img {
+            max-width: 100%;
+            border: 1px solid #333;
+            box-shadow: 0 0 15px rgba(0,0,0,0.5);
+        }
+
+        .meta-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9em;
+        }
+        .meta-table td {
+            padding: 10px;
+            border-bottom: 1px solid #222;
+        }
+        .meta-table td:first-child { color: #888; width: 40%; }
+        .meta-table td:last-child { color: var(--neon-green, #00ff41); font-weight: bold; }
+
+        #map {
+            height: 300px;
+            width: 100%;
+            border: 1px solid var(--neon-green, #00ff41);
+            margin-top: 20px;
+            display: none; /* Se muestra solo si hay GPS */
+        }
+        
+        .no-gps-alert {
+            color: #ff0041;
+            border: 1px solid #ff0041;
+            padding: 10px;
+            display: none;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+    <div class="grid-overlay"></div>
+
+    <div class="container">
+        <header>
+            <div class="status-bar">
+                <span>MODULE: EXIF_HUNTER</span>
+                <span>SYSTEM: ONLINE</span>
+                <span>V.1.0</span>
+            </div>
+
+            <h1>METADATA<span class="highlight">EXTRACTOR</span></h1>
+            
+            <nav class="main-nav">
+                <a href="index.html">[ BACK_TO_SEARCH ]</a>
+                <a href="meta-extractor.html" class="active">[ EXIF_TOOL ]</a>
+                <a href="academy/index.html">[ ACADEMY_DB ]</a>
+            </nav>
+        </header>
+
+        <main>
+            <section class="instructions-panel">
+                <div class="panel-header">/// FORENSIC ANALYSIS PROTOCOL ///</div>
+                <p style="padding: 15px; color: #ccc;">
+                    Upload any image (JPG/JPEG) to extract hidden metadata.
+                    <br><i class="fas fa-shield-alt"></i> <strong>PRIVACY:</strong> Processing is done locally in your browser. Images are NEVER uploaded to our servers.
+                </p>
+            </section>
+
+            <div id="ezoic-pub-ad-placeholder-109"></div>
+
+            <div class="upload-area" id="drop-zone">
+                <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                <h3>DRAG & DROP IMAGE HERE</h3>
+                <p>or click to browse files</p>
+                <input type="file" id="file-input" accept="image/jpeg, image/jpg">
+            </div>
+
+            <div id="ezoic-pub-ad-placeholder-111"></div>
+
+            <div class="results-container" id="results">
+                <div class="panel-header">/// ANALYSIS REPORT ///</div>
+                
+                <div class="data-grid">
+                    <div class="image-preview">
+                        <img id="preview-img" src="" alt="Analyzed Image">
+                    </div>
+                    
+                    <div class="meta-data">
+                        <table class="meta-table">
+                            <tr><td>CAMERA MODEL:</td><td id="cam-model">---</td></tr>
+                            <tr><td>DATE TAKEN:</td><td id="date-taken">---</td></tr>
+                            <tr><td>SOFTWARE:</td><td id="software">---</td></tr>
+                            <tr><td>EXPOSURE:</td><td id="exposure">---</td></tr>
+                            <tr><td>ISO:</td><td id="iso">---</td></tr>
+                            <tr><td>GPS STATUS:</td><td id="gps-status">SCANNING...</td></tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="map"></div>
+                <div id="no-gps" class="no-gps-alert">
+                    <i class="fas fa-exclamation-triangle"></i> NO GPS DATA FOUND IN THIS IMAGE
+                </div>
+
+            </div>
+        </main>
+        
+        <div id="ezoic-pub-ad-placeholder-112"></div>
+
+        <footer class="site-footer">
+            <div class="footer-bottom">
+                <p>© 2026 DorkSearch PRO | <a href="privacy.html">PRIVACY_PROTOCOL</a></p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Lógica de Subida y Arrastre
+        const dropZone = document.getElementById('drop-zone');
+        const fileInput = document.getElementById('file-input');
+        const results = document.getElementById('results');
+        const previewImg = document.getElementById('preview-img');
+        let map = null;
+
+        dropZone.addEventListener('click', () => fileInput.click());
+
+        fileInput.addEventListener('change', function(e) {
+            handleFile(e.target.files[0]);
+        });
+
+        // Drag & Drop effects
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.style.borderColor = '#fff';
+        });
+        dropZone.addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            dropZone.style.borderColor = '#333';
+        });
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.style.borderColor = '#333';
+            handleFile(e.dataTransfer.files[0]);
+        });
+
+        function handleFile(file) {
+            if (!file || !file.type.match('image/jpeg')) {
+                alert('ERROR: Please upload a valid JPG/JPEG image.');
+                return;
+            }
+
+            // Mostrar vista previa
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                previewImg.src = e.target.result;
+                results.style.display = 'block';
+                analyzeExif(previewImg);
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function analyzeExif(imgElement) {
+            // Resetear datos
+            document.getElementById('cam-model').innerText = "---";
+            document.getElementById('date-taken').innerText = "---";
+            document.getElementById('gps-status').innerText = "ANALYZING...";
+            document.getElementById('map').style.display = 'none';
+            document.getElementById('no-gps').style.display = 'none';
+
+            EXIF.getData(imgElement, function() {
+                // Extraer datos básicos
+                const model = EXIF.getTag(this, "Model") || "Unknown Device";
+                const make = EXIF.getTag(this, "Make") || "";
+                const date = EXIF.getTag(this, "DateTime") || "Unknown Date";
+                const software = EXIF.getTag(this, "Software") || "Unknown";
+                const iso = EXIF.getTag(this, "ISOSpeedRatings") || "---";
+                const exposure = EXIF.getTag(this, "ExposureTime") ? "1/" + (1/EXIF.getTag(this, "ExposureTime")).toFixed(0) : "---";
+
+                // Pintar tabla
+                document.getElementById('cam-model').innerText = `${make} ${model}`;
+                document.getElementById('date-taken').innerText = date;
+                document.getElementById('software').innerText = software;
+                document.getElementById('iso').innerText = iso;
+                document.getElementById('exposure').innerText = exposure;
+
+                // Extraer GPS
+                const lat = EXIF.getTag(this, "GPSLatitude");
+                const lon = EXIF.getTag(this, "GPSLongitude");
+                const latRef = EXIF.getTag(this, "GPSLatitudeRef");
+                const lonRef = EXIF.getTag(this, "GPSLongitudeRef");
+
+                if (lat && lon) {
+                    const decimalLat = convertDMSToDD(lat, latRef);
+                    const decimalLon = convertDMSToDD(lon, lonRef);
+                    
+                    document.getElementById('gps-status').innerText = `LOCKED: ${decimalLat.toFixed(5)}, ${decimalLon.toFixed(5)}`;
+                    document.getElementById('gps-status').style.color = "#00ff41";
+                    
+                    showMap(decimalLat, decimalLon);
+                } else {
+                    document.getElementById('gps-status').innerText = "NOT FOUND";
+                    document.getElementById('gps-status').style.color = "#ff0041";
+                    document.getElementById('no-gps').style.display = 'block';
+                }
+            });
+        }
+
+        function convertDMSToDD(dms, ref) {
+            let dd = dms[0] + dms[1]/60 + dms[2]/3600;
+            if (ref == "S" || ref == "W") {
+                dd = dd * -1;
+            }
+            return dd;
+        }
+
+        function showMap(lat, lon) {
+            const mapContainer = document.getElementById('map');
+            mapContainer.style.display = 'block';
+
+            // Reiniciar mapa si ya existe
+            if (map !== null) {
+                map.remove();
+            }
+
+            map = L.map('map').setView([lat, lon], 13);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+
+            L.marker([lat, lon]).addTo(map)
+                .bindPopup('TARGET LOCATION')
+                .openPopup();
+        }
+    </script>
+
+    <script>
+        ezstandalone.cmd.push(function() {
+            ezstandalone.showAds(109, 111, 112);
+        });
+    </script>
+</body>
+</html>
