@@ -168,7 +168,7 @@
             <div class="status-bar">
                 <span>MODULE: STEGANOGRAPHY</span>
                 <span>SYSTEM: ONLINE</span>
-                <span>V.1.4</span>
+                <span>V.1.5</span>
             </div>
 
             <h1>DORK<span class="highlight">SEARCH</span>PRO</h1>
@@ -253,13 +253,20 @@
 
     <script>
         const zeroPad = num => '00000000'.slice(String(num).length) + num;
+        
         const textToBinary = username => (
             username.split('').map(char => zeroPad(char.charCodeAt(0).toString(2))).join(' ')
         );
+
+        // CORRECCIÓN APLICADA: .filter() elimina cadenas vacías o espacios fantasma
         const binaryToText = string => (
-            string.split(' ').map(char => String.fromCharCode(parseInt(char, 2))).join('')
+            string.split(' ')
+                  .filter(bin => bin.trim() !== '') 
+                  .map(char => String.fromCharCode(parseInt(char, 2)))
+                  .join('')
         );
 
+        // Caracteres invisibles
         const zeroWidthSpace = '\u200B'; 
         const zeroWidthNonJoiner = '\u200C'; 
         const zeroWidthJoiner = '\u200D'; 
@@ -284,6 +291,7 @@
                 else hiddenString += zeroWidthJoiner; 
             }
 
+            // Inyección Segura (Spread Syntax para Emojis)
             const visibleChars = [...cover]; 
             
             if (visibleChars.length === 0) {
@@ -296,6 +304,7 @@
             resultBox.innerText = finalString;
             resultBox.style.borderLeftColor = "#00ff41";
             
+            // Activar botón copiar
             copyBtn.classList.add('active');
             
             copyBtn.onclick = function() {
@@ -334,10 +343,13 @@
 
             try {
                 const clearText = binaryToText(binaryString);
+                // Si tras limpiar la basura el texto está vacío, lanzamos error
+                if(!clearText) throw new Error("Empty Payload");
+
                 resultBox.innerText = "DECRYPTED: " + clearText;
                 resultBox.style.borderColor = "#00ff41";
             } catch(e) {
-                resultBox.innerText = "ERROR: CORRUPTED DATA";
+                resultBox.innerText = "ERROR: CORRUPTED DATA OR NO PAYLOAD";
             }
         }
     </script>
