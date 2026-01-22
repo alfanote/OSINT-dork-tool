@@ -111,7 +111,7 @@
             <div class="status-bar">
                 <span>MODULE: EXIF_HUNTER</span>
                 <span>SYSTEM: ONLINE</span>
-                <span>V.2.0</span>
+                <span>V.2.1</span>
             </div>
 
             <h1>METADATA<span class="highlight">EXTRACTOR</span></h1>
@@ -228,7 +228,6 @@
 
             const reader = new FileReader();
 
-            // PASO CRÍTICO: Definir onload ANTES de leer el archivo
             reader.onload = function(e) {
                 // Definir qué pasa cuando la imagen carga visualmente
                 previewImg.onload = function() {
@@ -243,6 +242,11 @@
         }
 
         function analyzeExif(imgElement) {
+            // --- CORRECCIÓN CLAVE ---
+            // Limpiamos los datos previos de la memoria del objeto imagen
+            imgElement.exifdata = null; 
+            // ------------------------
+
             document.getElementById('gps-status').innerText = "ANALYZING BINARY...";
             
             // Verificar si la librería cargó bien
@@ -255,8 +259,7 @@
 
             try {
                 EXIF.getData(imgElement, function() {
-                    console.log("EXIF Data Found:", this.exifdata); // Debug en consola
-
+                    
                     // 1. Extraer Datos Generales
                     const make = EXIF.getTag(this, "Make") || "";
                     const model = EXIF.getTag(this, "Model") || "Unknown";
