@@ -111,10 +111,11 @@
             <div class="status-bar">
                 <span>MODULE: EXIF_HUNTER</span>
                 <span>SYSTEM: ONLINE</span>
-                <span>V.2.2</span>
+                <span>V.2.3</span>
             </div>
 
-            <h1>METADATA<span class="highlight">EXTRACTOR</span></h1>
+            <h1>DORK<span class="highlight">SEARCH</span>PRO</h1>
+            <p class="subtitle">MODULE: EXIF METADATA & GPS EXTRACTOR</p>
             
             <nav class="main-nav">
                 <a href="index.html">[ BACK_TO_SEARCH ]</a>
@@ -189,7 +190,6 @@
         const previewImg = document.getElementById('preview-img');
         let map = null;
 
-        // Listeners básicos
         dropZone.addEventListener('click', () => fileInput.click());
 
         fileInput.addEventListener('change', function(e) {
@@ -198,7 +198,6 @@
             }
         });
 
-        // Efectos Drag & Drop
         dropZone.addEventListener('dragover', (e) => {
             e.preventDefault();
             dropZone.style.borderColor = '#fff';
@@ -216,13 +215,11 @@
         });
 
         function handleFile(file) {
-            // Verificar tipo de archivo
             if (!file || !file.type.match(/image\/jpe?g/i)) {
                 alert('ERROR: Please upload a valid JPG/JPEG image.');
                 return;
             }
 
-            // Preparar UI
             document.getElementById('gps-status').innerText = "LOADING IMAGE...";
             document.getElementById('gps-status').style.color = "#ccc";
             results.style.display = 'block';
@@ -230,25 +227,20 @@
             const reader = new FileReader();
 
             reader.onload = function(e) {
-                // Definir qué pasa cuando la imagen carga visualmente
                 previewImg.onload = function() {
                     analyzeExif(previewImg);
                 };
-                // Asignar fuente (esto dispara el onload anterior)
                 previewImg.src = e.target.result;
             };
 
-            // Leer archivo
             reader.readAsDataURL(file);
         }
 
         function analyzeExif(imgElement) {
-            // Limpiamos los datos previos de la memoria del objeto imagen
             imgElement.exifdata = null; 
 
             document.getElementById('gps-status').innerText = "ANALYZING BINARY...";
             
-            // Verificar si la librería cargó bien
             if (typeof EXIF === 'undefined') {
                 document.getElementById('gps-status').innerText = "ERROR: LIB NOT LOADED";
                 document.getElementById('gps-status').style.color = "red";
@@ -259,7 +251,6 @@
             try {
                 EXIF.getData(imgElement, function() {
                     
-                    // 1. Extraer Datos Generales
                     const make = EXIF.getTag(this, "Make") || "";
                     const model = EXIF.getTag(this, "Model") || "Unknown";
                     const date = EXIF.getTag(this, "DateTime") || "Unknown Date";
@@ -272,20 +263,17 @@
                         exposure = (expTime >= 1) ? expTime : "1/" + Math.round(1/expTime);
                     }
 
-                    // Actualizar Tabla
                     document.getElementById('cam-model').innerText = `${make} ${model}`;
                     document.getElementById('date-taken').innerText = date;
                     document.getElementById('software').innerText = software;
                     document.getElementById('iso').innerText = iso;
                     document.getElementById('exposure').innerText = exposure;
 
-                    // 2. Extraer GPS
                     const latArr = EXIF.getTag(this, "GPSLatitude");
                     const lonArr = EXIF.getTag(this, "GPSLongitude");
                     const latRef = EXIF.getTag(this, "GPSLatitudeRef");
                     const lonRef = EXIF.getTag(this, "GPSLongitudeRef");
 
-                    // Resetear zonas de mapa
                     document.getElementById('map').style.display = 'none';
                     document.getElementById('no-gps').style.display = 'none';
 
@@ -299,7 +287,7 @@
                         showMap(decimalLat, decimalLon);
                     } else {
                         document.getElementById('gps-status').innerText = "DATA EXTRACTED (NO GPS)";
-                        document.getElementById('gps-status').style.color = "#ffb700"; // Naranja
+                        document.getElementById('gps-status').style.color = "#ffb700"; 
                         document.getElementById('no-gps').style.display = 'block';
                     }
                 });
