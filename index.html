@@ -173,8 +173,7 @@
                 </div>
             </section>
 
-            <div style="margin: 20px 0; text-align: center; border: 1px dashed #333; padding: 10px; background: rgba(255,255,255,0.02);">
-                <span style="color: #666; font-size: 0.8rem;">[ PEGA AQUÍ TU CÓDIGO DE ADSTERRA ]</span>
+            <div class="ad-slot-top" style="margin: 20px 0; text-align: center;">
             </div>
 
             <section class="input-section" aria-label="Search Configuration">
@@ -214,8 +213,7 @@
                 </div>
             </section>
 
-            <div style="margin: 20px 0; text-align: center; border: 1px dashed #333; padding: 10px; background: rgba(255,255,255,0.02);">
-                <span style="color: #666; font-size: 0.8rem;">[ PEGA AQUÍ TU CÓDIGO DE ADSTERRA ]</span>
+            <div class="ad-slot-middle" style="margin: 20px 0; text-align: center;">
             </div>
 
             <section class="dorks-grid" id="dorks-container" aria-label="Google Dork Categories">
@@ -239,18 +237,17 @@
                 <div class="content-block" style="margin-bottom: 30px;">
                     <h3>// 01. WHAT_IS_GOOGLE_DORKING?</h3>
                     <p><strong>Google Dorking</strong>, professionally known as <em>Google Hacking</em>, is an advanced Open Source Intelligence (OSINT) technique used by security researchers, penetration testers, and journalists. It involves using specialized search operators (advanced queries) to filter and locate specific information that has been indexed by Google but is not easily visible through standard searches.</p>
-                    <p>While standard users search for keywords, a Dorker uses operators to ask the database specific questions, such as: <em>"Show me all PDF files on this government website"</em> or <em>"List all configuration files exposed on this server."</em></p>
                 </div>
 
                 <div class="content-block" style="margin-bottom: 30px;">
                     <h3>// 02. CRITICAL_OPERATORS_SYNTAX</h3>
                     <p>Mastering the syntax is crucial for effective reconnaissance. DorkSearch PRO automates this, but understanding the logic is essential for manual verification:</p>
                     <ul class="operators-list">
-                        <li><code>site:</code> <strong>[Scope Definition]</strong> Restricts results to a specific domain (e.g., <code>site:harvard.edu</code>). This is the primary filter to avoid noise from the rest of the internet.</li>
-                        <li><code>filetype:</code> <strong>[Extension Targeting]</strong> Searches for specific file extensions. Common targets include <code>pdf</code> (documents), <code>xls/xlsx</code> (excel data), <code>conf/xml</code> (server configurations), and <code>sql</code> (database dumps).</li>
-                        <li><code>inurl:</code> <strong>https://www.merriam-webster.com/dictionary/pattern</strong> Looks for strings inside the URL itself. Extremely useful for finding admin panels (e.g., <code>inurl:admin</code>, <code>inurl:login</code>) or specific directories.</li>
-                        <li><code>intitle:</code> <strong>[Page Title Search]</strong> Searches for words in the HTML title tag. This is highly effective for finding directory listings (e.g., <code>intitle:"index of"</code>).</li>
-                        <li><code>intext:</code> <strong>[Body Content Search]</strong> Scans the body text of the page. Useful for finding specific error messages or leaked credentials inside a file.</li>
+                        <li><code>site:</code> <strong>[Scope Definition]</strong> Restricts results to a specific domain (e.g., <code>site:harvard.edu</code>).</li>
+                        <li><code>filetype:</code> <strong>[Extension Targeting]</strong> Searches for specific file extensions (pdf, xls, conf).</li>
+                        <li><code>inurl:</code> <strong>https://www.merriam-webster.com/dictionary/pattern</strong> Looks for strings inside the URL itself (e.g., <code>inurl:admin</code>).</li>
+                        <li><code>intitle:</code> <strong>[Page Title Search]</strong> Searches for words in the HTML title tag.</li>
+                        <li><code>intext:</code> <strong>[Body Content Search]</strong> Scans the body text of the page.</li>
                     </ul>
                 </div>
 
@@ -258,12 +255,12 @@
                     <h3>// 03. USE_CASES & ETHICAL_PROTOCOL</h3>
                     <p>DorkSearch PRO is designed for defensive and educational purposes. The primary use cases include:</p>
                     <ul>
-                        <li><strong>Self-Audit:</strong> checking your own organization to ensure no sensitive files (invoices, client lists) are publicly indexed.</li>
-                        <li><strong>Bug Bounty Hunting:</strong> Identifying vulnerabilities in scope for authorized bounty programs.</li>
-                        <li><strong>OSINT Research:</strong> Gathering publicly available information for journalism or academic research.</li>
+                        <li><strong>Self-Audit:</strong> checking your own organization.</li>
+                        <li><strong>Bug Bounty Hunting:</strong> Identifying vulnerabilities in scope.</li>
+                        <li><strong>OSINT Research:</strong> Gathering publicly available information.</li>
                     </ul>
                     <p style="border-left: 3px solid #ff0041; padding-left: 15px; margin-top: 15px; color: #aaa;">
-                        <strong>⚠️ LEGAL DISCLAIMER:</strong> Google Dorking utilizes public search tools and is legal. However, using these results to access, download, or exploit private data without authorization is illegal and punishable under computer crime laws (e.g., CFAA in the US). Always operate within legal boundaries.
+                        <strong>⚠️ LEGAL DISCLAIMER:</strong> Google Dorking utilizes public search tools and is legal. However, using these results to access, download, or exploit private data without authorization is illegal. Always operate within legal boundaries.
                     </p>
                 </div>
             </section>
@@ -274,27 +271,21 @@
             
             <details>
                 <summary>Is this tool essentially a Google Hacking Database (GHDB)?</summary>
-                <p>DorkSearch PRO functions as a dynamic interface for the concepts found in the GHDB (Exploit-DB). Instead of manually copying and pasting dorks, our system builds them algorithmically based on your target input, ensuring syntax accuracy and saving time during the reconnaissance phase.</p>
+                <p>DorkSearch PRO functions as a dynamic interface for the concepts found in the GHDB (Exploit-DB). Instead of manually copying and pasting dorks, our system builds them algorithmically.</p>
             </details>
 
             <details>
                 <summary>Why do I see "403 Forbidden" or CAPTCHAs?</summary>
-                <p>Google employs automated systems to detect automated queries. If you execute too many dorks rapidly, Google may temporarily flag your IP. This is a standard defense mechanism. To bypass this, solve the CAPTCHA manually or wait a few minutes before continuing your scan.</p>
+                <p>Google employs automated systems to detect automated queries. If you execute too many dorks rapidly, Google may temporarily flag your IP. Solve the CAPTCHA manually to continue.</p>
             </details>
 
             <details>
                 <summary>Can DorkSearch PRO scan the deep web?</summary>
-                <p>No. This tool interacts exclusively with the Surface Web (indexed content). It queries Google's public index. It does not access the dark web, onion networks, or non-indexed databases.</p>
-            </details>
-
-            <details>
-                <summary>How can I protect my website from Dorking?</summary>
-                <p>To prevent your files from being "dorked," you should use a <code>robots.txt</code> file to disallow sensitive directories from indexing. Additionally, ensure proper server permissions (chmod) are set so that configuration files and directories are not publicly readable, and use password protection (.htaccess) for sensitive areas.</p>
+                <p>No. This tool interacts exclusively with the Surface Web (indexed content). It queries Google's public index.</p>
             </details>
         </section>
 
-        <div style="margin: 20px 0; text-align: center; border: 1px dashed #333; padding: 10px; background: rgba(255,255,255,0.02);">
-            <span style="color: #666; font-size: 0.8rem;">[ PEGA AQUÍ TU CÓDIGO DE ADSTERRA ]</span>
+        <div class="ad-slot-bottom" style="margin: 20px 0; text-align: center;">
         </div>
 
         <footer class="site-footer">
@@ -330,5 +321,8 @@
     </div>
 
     <script src="script.js"></script>
+
+    <script src="https://pl28523256.effectivegatecpm.com/52/18/33/521833c5f27e50fdd6d2c8fedc201ed8.js"></script>
+
 </body>
 </html>
