@@ -270,18 +270,38 @@
             <h2>>> FREQUENTLY_ASKED_QUESTIONS</h2>
             
             <details>
+                <summary>Is it legal to use Google Dorking tools?</summary>
+                <p>Yes, using Google Dorks and dorking tools is completely legal as they only utilize public Google search operators to find publicly indexed information. However, accessing or exploiting private systems without authorization is illegal. This tool should only be used for authorized security audits, ethical penetration testing, OSINT research, or educational purposes.</p>
+            </details>
+
+            <details>
+                <summary>Does DorkSearch PRO store my search data or target domains?</summary>
+                <p>No. DorkSearch PRO is 100% client-side, meaning all processing happens in your browser. No data is sent to external servers or stored in any database. Your searches and target domains remain completely private.</p>
+            </details>
+
+            <details>
+                <summary>What are Google Dorks and how do they work?</summary>
+                <p>Google Dorks are advanced search operators that allow security researchers and penetration testers to discover information exposed on the internet that isn't easily accessible through standard searches. They use special commands like 'filetype:', 'inurl:', 'site:', and 'intitle:' to filter Google results.</p>
+            </details>
+
+            <details>
                 <summary>Is this tool essentially a Google Hacking Database (GHDB)?</summary>
-                <p>DorkSearch PRO functions as a dynamic interface for the concepts found in the GHDB (Exploit-DB). Instead of manually copying and pasting dorks, our system builds them algorithmically.</p>
+                <p>DorkSearch PRO functions as a dynamic interface for the concepts found in the GHDB (Exploit-DB). Instead of manually copying and pasting dorks, our system builds them algorithmically based on your target input.</p>
             </details>
 
             <details>
                 <summary>Why do I see "403 Forbidden" or CAPTCHAs?</summary>
-                <p>Google employs automated systems to detect automated queries. If you execute too many dorks rapidly, Google may temporarily flag your IP. Solve the CAPTCHA manually to continue.</p>
+                <p>Google employs automated systems to detect automated queries. If you execute too many dorks rapidly, Google may temporarily flag your IP. This is a standard defense mechanism. Solve the CAPTCHA manually to continue.</p>
             </details>
 
             <details>
                 <summary>Can DorkSearch PRO scan the deep web?</summary>
-                <p>No. This tool interacts exclusively with the Surface Web (indexed content). It queries Google's public index.</p>
+                <p>No. This tool interacts exclusively with the Surface Web (indexed content). It queries Google's public index. It does not access the dark web, onion networks, or non-indexed databases.</p>
+            </details>
+
+            <details>
+                <summary>How can I protect my website from Dorking?</summary>
+                <p>To prevent your files from being "dorked," you should use a <code>robots.txt</code> file to disallow sensitive directories from indexing and ensure proper server permissions (chmod).</p>
             </details>
         </section>
 
