@@ -23,7 +23,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EXIF Metadata Viewer & GPS Tracker | DorkSearch PRO</title>
-    <meta name="description" content="Free online EXIF viewer. Extract hidden metadata from images: GPS coordinates, camera details, date, and software info. 100% Client-side.">
+    <meta name="description" content="Free online EXIF viewer. Extract hidden metadata from images: GPS coordinates, camera details, date, and software info. Learn about digital footprints.">
     
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
@@ -100,6 +100,33 @@
             text-align: center;
         }
 
+        /* SEO CONTENT STYLES (Igual que en Emoji Crypt) */
+        .deep-dive {
+            margin-top: 80px;
+            border-top: 1px solid #333;
+            padding-top: 40px;
+            color: #ccc;
+        }
+        .deep-dive h2 {
+            color: #fff;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--neon-green);
+            padding-left: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .deep-dive h3 {
+            color: var(--neon-green);
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        .deep-dive p { margin-bottom: 15px; line-height: 1.7; font-size: 1rem; }
+        .deep-dive ul { margin-left: 20px; margin-bottom: 20px; }
+        .deep-dive li { margin-bottom: 10px; }
+        .deep-dive code { background: #111; color: var(--neon-green); padding: 2px 5px; }
+
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
@@ -169,8 +196,52 @@
                 <div id="no-gps" class="no-gps-alert">
                     <i class="fas fa-exclamation-triangle"></i> NO GPS DATA FOUND IN THIS IMAGE
                 </div>
-
             </div>
+
+            <section class="deep-dive">
+                <h2>>> TECHNICAL BRIEFING: THE HIDDEN DATA LAYER</h2>
+                <p>Every time you take a photo with a smartphone or a modern digital camera, the device records more than just light and color. It embeds a hidden layer of data known as <strong>Metadata</strong>. This information acts as a digital fingerprint, providing forensic analysts with details about the device, the settings, and most critically, the physical location where the image was captured.</p>
+
+                <h3>// What is EXIF Data?</h3>
+                <p><strong>EXIF (Exchangeable Image File Format)</strong> is the standard that specifies the formats for images, sound, and ancillary tags used by digital cameras and smartphones. While useful for photographers to organize their libraries (sorting by date, camera model, or lens type), it poses a significant privacy risk when shared inadvertently.</p>
+                <p>Key data points often found in EXIF tags include:</p>
+                <ul>
+                    <li><strong>Device Info:</strong> Manufacturer, Model (e.g., iPhone 15 Pro, Canon R5).</li>
+                    <li><strong>Exposure Settings:</strong> Shutter speed, Aperture (f-stop), ISO speed.</li>
+                    <li><strong>DateTime Original:</strong> The exact second the photo was taken.</li>
+                    <li><strong>GPS Coordinates:</strong> Latitude, Longitude, and Altitude.</li>
+                </ul>
+
+                <h2>>> THE PRIVACY THREAT: GEOLOCATION LEAKS</h2>
+                <p>The most dangerous component of metadata is the <strong>GPS Geotag</strong>. If you take a photo at your home or workplace and upload it directly to a blog, forum, or share it via email, you are essentially broadcasting your exact coordinates to the world.</p>
+
+                <h3>// OSINT & "Cyberstalking"</h3>
+                <p>In the field of <strong>OSINT (Open Source Intelligence)</strong>, metadata extraction is one of the first steps in verifying the authenticity of an image or locating a target. Security researchers use tools like this <em>EXIF Hunter</em> to validate leaks or track events.</p>
+                <p>However, bad actors use the same technology for "Cyberstalking." By analyzing photos posted on personal blogs or unstripped messaging apps, they can build a pattern of life, determining where a person lives, works, or goes to school.</p>
+
+                <h3>// Do Social Media Sites Remove EXIF?</h3>
+                <p>Most major platforms (Facebook, Instagram, Twitter/X, WhatsApp) automatically strip metadata (sanitize the file) during the upload process to protect user privacy. However, many other platforms do not:</p>
+                <ul>
+                    <li>Email attachments (often keep full metadata).</li>
+                    <li>Cloud storage links (Dropbox, Google Drive).</li>
+                    <li>Direct file transfers (AirDrop, Bluetooth).</li>
+                    <li>Many web forums and smaller social networks.</li>
+                </ul>
+
+                <h2>>> DEFENSIVE PROTOCOL: HOW TO SCRUB METADATA</h2>
+                <p>To maintain operational security (OPSEC), you should sanitize images before public release.</p>
+                <ol>
+                    <li><strong>Windows:</strong> Right-click the image > Properties > Details > "Remove Properties and Personal Information".</li>
+                    <li><strong>macOS:</strong> Open in Preview > Tools > Show Inspector > GPS > Remove Location Info.</li>
+                    <li><strong>Mobile:</strong> Use specialized apps like "Metapho" (iOS) or "Photo Metadata Remover" (Android).</li>
+                    <li><strong>DorkSearch PRO:</strong> Use this viewer to verify that your scrubbing was successful before sharing.</li>
+                </ol>
+
+                <p style="margin-top: 30px; padding: 20px; border: 1px solid #333; background: #000;">
+                    <strong>DISCLAIMER:</strong> DorkSearch PRO processes all images client-side. Your photos are never uploaded to our servers. This tool is provided for educational purposes to help users understand their digital footprint and improve their privacy.
+                </p>
+            </section>
+
         </main>
         
         <div id="ezoic-pub-ad-placeholder-112"></div>
