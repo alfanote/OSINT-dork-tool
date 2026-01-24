@@ -233,7 +233,7 @@
             <div class="status-bar">
                 <span>MODULE: STEGANOGRAPHY</span>
                 <span>SYSTEM: ONLINE</span>
-                <span>V.1.7 (DEMO MODE)</span>
+                <span>V.2.0 (STABLE)</span>
             </div>
 
             <h1>DORK<span class="highlight">SEARCH</span>PRO</h1>
@@ -434,22 +434,6 @@
             const resultBox = document.getElementById('decode-result');
 
             if(!input) return;
-
-            // --- TRUCO PARA EL VÍDEO (BYPASS ERRORES DE PORTAPAPELES) ---
-            if (input.includes('😀')) {
-                resultBox.innerText = "DECRYPTED: TARGET LOCATED: 40.4167, -3.7037";
-                resultBox.style.borderColor = "#00ff41";
-                resultBox.style.color = "#00ff41";
-                return; 
-            }
-
-            if (input.includes('👍')) {
-                resultBox.innerText = "DECRYPTED: WAITING FOR SIGNAL";
-                resultBox.style.borderColor = "#00ff41";
-                resultBox.style.color = "#00ff41";
-                return; 
-            }
-            // -----------------------------------------------------------
 
             let binaryString = '';
             for (let i = 0; i < input.length; i++) {
