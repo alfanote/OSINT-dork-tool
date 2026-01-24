@@ -175,10 +175,58 @@
         .deep-dive li { margin-bottom: 10px; }
         .deep-dive code { background: #111; color: var(--neon-green); padding: 2px 5px; }
 
+        /* =========================================
+           ESTILOS PARA LOS BANNERS LATERALES
+           ========================================= */
+        .ad-sidebar {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 160px;
+            height: 600px;
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .left-ad { left: 10px; }
+        .right-ad { right: 10px; }
+
+        /* Ocultar en pantallas pequeñas (Móviles/Tablets) */
+        @media (max-width: 1450px) {
+            .ad-sidebar { display: none !important; }
+        }
+
     </style>
 </head>
 <body>
     <div class="grid-overlay"></div>
+
+    <div class="ad-sidebar left-ad">
+        <script type="text/javascript">
+            atOptions = {
+                'key' : 'a8e8d0248a172149512f5a6e2c4ce2d0',
+                'format' : 'iframe',
+                'height' : 600,
+                'width' : 160,
+                'params' : {}
+            };
+        </script>
+        <script type="text/javascript" src="https://www.highperformanceformat.com/a8e8d0248a172149512f5a6e2c4ce2d0/invoke.js"></script>
+    </div>
+
+    <div class="ad-sidebar right-ad">
+        <script type="text/javascript">
+            atOptions = {
+                'key' : 'a8e8d0248a172149512f5a6e2c4ce2d0',
+                'format' : 'iframe',
+                'height' : 600,
+                'width' : 160,
+                'params' : {}
+            };
+        </script>
+        <script type="text/javascript" src="https://www.highperformanceformat.com/a8e8d0248a172149512f5a6e2c4ce2d0/invoke.js"></script>
+    </div>
 
     <div class="container">
         <header>
@@ -389,14 +437,14 @@
                 resultBox.innerText = "DECRYPTED: TARGET LOCATED: 40.4167, -3.7037";
                 resultBox.style.borderColor = "#00ff41";
                 resultBox.style.color = "#00ff41";
-                return; // Detiene la ejecución normal
+                return; 
             }
 
             if (input.includes('👍')) {
                 resultBox.innerText = "DECRYPTED: WAITING FOR SIGNAL";
                 resultBox.style.borderColor = "#00ff41";
                 resultBox.style.color = "#00ff41";
-                return; // Detiene la ejecución normal
+                return; 
             }
             // -----------------------------------------------------------
 
