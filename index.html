@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3469502188782084" crossorigin="anonymous"></script>
-
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-MHWF85ZZ24"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -72,60 +71,6 @@
       ]
     }
     </script>
-
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [{
-        "@type": "Question",
-        "name": "What are Google Dorks and how do they work?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Google Dorks are advanced search operators that allow security researchers and penetration testers to discover information exposed on the internet that isn't easily accessible through standard searches. They use special commands like 'filetype:', 'inurl:', 'site:', and 'intitle:' to filter Google results and find sensitive files, admin panels, configuration files, and potential security vulnerabilities."
-        }
-      }, {
-        "@type": "Question",
-        "name": "Is it legal to use Google Dorking tools?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes, using Google Dorks and dorking tools is completely legal as they only utilize public Google search operators to find publicly indexed information. However, accessing or exploiting private systems without authorization is illegal. This tool should only be used for authorized security audits, ethical penetration testing, OSINT research, or educational purposes."
-        }
-      }, {
-        "@type": "Question",
-        "name": "Does DorkSearch PRO store my search data or target domains?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "No. DorkSearch PRO is 100% client-side, meaning all processing happens in your browser. No data is sent to external servers or stored in any database. Your searches and target domains remain completely private."
-        }
-      }]
-    }
-    </script>
-
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "HowTo",
-      "name": "How to Use Google Dorks for OSINT Research",
-      "description": "Step-by-step guide to using DorkSearch PRO for security reconnaissance",
-      "step": [{
-        "@type": "HowToStep",
-        "position": 1,
-        "name": "Enter Target Domain",
-        "text": "Type the target domain in the input field (e.g., example.com)"
-      }, {
-        "@type": "HowToStep",
-        "position": 2,
-        "name": "Select Dork Category",
-        "text": "Choose from predefined categories like Files & Documents, Server Configuration, or Entry Points"
-      }, {
-        "@type": "HowToStep",
-        "position": 3,
-        "name": "Execute Search",
-        "text": "Click on a specific dork button to generate and execute the Google search query"
-      }]
-    }
-    </script>
 </head>
 <body>
     <div class="grid-overlay"></div>
@@ -134,8 +79,8 @@
         <header>
             <div class="status-bar">
                 <span>SYSTEM: ONLINE</span>
-                <span>SECURE CONNECTION</span>
-                <span>V.2.1</span>
+                <span>MODE: <span id="status-mode">SECURE</span></span>
+                <span>V.3.7 FINAL</span>
             </div>
 
             <h1>DORK<span class="highlight">SEARCH</span>PRO</h1>
@@ -152,29 +97,35 @@
         </header>
 
         <main>
+            <div class="mode-switcher">
+                <button id="btn-sec" class="mode-btn active" onclick="switchPageMode('sec')">
+                    <i class="fas fa-shield-alt"></i> CYBERSECURITY
+                </button>
+                <button id="btn-media" class="mode-btn" onclick="switchPageMode('media')">
+                    <i class="fas fa-search-dollar"></i> FILE_HUNTER
+                </button>
+            </div>
+
             <section class="instructions-panel">
                 <div class="panel-header">/// OPERATIONAL PROTOCOL ///</div>
                 <div class="steps-grid">
                     <div class="step">
                         <i class="fas fa-bullseye"></i>
                         <h4>1. TARGET</h4>
-                        <p>Define domain (e.g. nasa.gov)</p>
+                        <p>Domain (Sec) or Name (Media)</p>
                     </div>
                     <div class="step">
                         <i class="fas fa-fingerprint"></i>
                         <h4>2. PAYLOAD</h4>
-                        <p>Optional: Topic (e.g. "confidential")</p>
+                        <p>Select a Dork Category</p>
                     </div>
                     <div class="step">
                         <i class="fas fa-bolt"></i>
                         <h4>3. EXECUTE</h4>
-                        <p>Click "SCAN TARGET" to launch</p>
+                        <p>Launch Google Query</p>
                     </div>
                 </div>
             </section>
-
-            <div class="ad-slot-top" style="margin: 20px 0; text-align: center;">
-            </div>
 
             <section class="input-section" aria-label="Search Configuration">
                 <div class="corner-decor top-left"></div>
@@ -182,48 +133,46 @@
                 <div class="corner-decor bottom-left"></div>
                 <div class="corner-decor bottom-right"></div>
                 
-                <label for="target">>> TARGET DOMAIN (SITE):</label>
-                <div class="input-wrapper">
-                    <span class="prefix">site:</span>
-                    <input type="text" 
-                           id="target" 
-                           placeholder="example.com" 
-                           autocomplete="off"
-                           aria-label="Enter target domain">
+                <div id="domain-group">
+                    <label for="target">>> TARGET DOMAIN (SITE):</label>
+                    <div class="input-wrapper">
+                        <span class="prefix">site:</span>
+                        <input type="text" 
+                               id="target" 
+                               placeholder="example.com" 
+                               autocomplete="off"
+                               aria-label="Enter target domain">
+                    </div>
                 </div>
                 
-                <label for="keyword-input" style="margin-top: 20px; display: block;">>> TARGET TOPIC (INTITLE):</label>
+                <label for="keyword-input" style="margin-top: 20px; display: block;">>> SEARCH QUERY / TOPIC:</label>
                 <div class="input-wrapper">
-                    <span class="prefix">intitle:</span>
+                    <span class="prefix"><i class="fas fa-search"></i></span>
                     <input type="text" 
                            id="keyword-input" 
-                           placeholder="dashboard, api_v1, staging, internal..." 
+                           placeholder="Loading parameters..." 
                            autocomplete="off"
                            aria-label="Enter search keyword">
                 </div>
 
                 <button onclick="runQuickSearch()" class="scan-btn">
-                    <i class="fas fa-radar"></i> INITIATE FULL SYSTEM SCAN
+                    <i class="fas fa-radar"></i> <span id="scan-text">INITIATE SCAN</span>
                 </button>
                 
                 <div id="query-preview" class="query-box hidden">
                     <span class="query-label">GENERATED_QUERY:</span>
                     <code id="query-text">waiting for input...</code>
-                    <button id="copy-btn" title="Copy command" aria-label="Copy to clipboard"><i class="fas fa-copy"></i> COPY</button>
+                    <button id="copy-btn" title="Copy command"><i class="fas fa-copy"></i> COPY</button>
                 </div>
             </section>
 
-            <div class="ad-slot-middle" style="margin: 20px 0; text-align: center;">
-            </div>
-
-            <section class="dorks-grid" id="dorks-container" aria-label="Google Dork Categories">
-                </section>
-
-            <div style="margin: 40px 0; text-align: center; border-top: 1px dashed #333; padding-top: 20px;">
-                <p style="font-size:0.8rem; color:#666; margin-bottom:10px;">RECOMMENDED_INTEL:</p>
+            <div style="margin: 30px 0 20px 0; text-align: center; border: 1px dashed #333; padding: 15px; background: rgba(0,0,0,0.2);">
+                <p style="font-size:0.7rem; color:#666; margin-bottom:10px; letter-spacing:1px;">SPONSORED_INTELLIGENCE:</p>
                 <script async="async" data-cfasync="false" src="https://pl28558446.effectivegatecpm.com/e81d07d58d502a501a18f60e43a6de72/invoke.js"></script>
                 <div id="container-e81d07d58d502a501a18f60e43a6de72"></div>
             </div>
+            <section class="dorks-grid" id="dorks-container" aria-label="Google Dork Categories">
+                </section>
 
             <section class="custom-dork-section">
                 <h3>// MANUAL_OVERRIDE (CUSTOM BUILDER)</h3>
@@ -250,10 +199,10 @@
                     <h3>// 02. CRITICAL_OPERATORS_SYNTAX</h3>
                     <p>Mastering the syntax is crucial for effective reconnaissance. DorkSearch PRO automates this, but understanding the logic is essential for manual verification:</p>
                     <ul class="operators-list">
-                        <li><code>site:</code> <strong>[Scope Definition]</strong> Restricts results to a specific domain (e.g., <code>site:harvard.edu</code>). This is the primary filter to avoid noise from the rest of the internet.</li>
-                        <li><code>filetype:</code> <strong>[Extension Targeting]</strong> Searches for specific file extensions. Common targets include <code>pdf</code> (documents), <code>xls/xlsx</code> (excel data), <code>conf/xml</code> (server configurations), and <code>sql</code> (database dumps).</li>
-                        <li><code>inurl:</code> <strong>https://www.merriam-webster.com/dictionary/pattern</strong> Looks for strings inside the URL itself. Extremely useful for finding admin panels (e.g., <code>inurl:admin</code>, <code>inurl:login</code>) or specific directories.</li>
-                        <li><code>intitle:</code> <strong>[Page Title Search]</strong> Searches for words in the HTML title tag. This is highly effective for finding directory listings (e.g., <code>intitle:"index of"</code>).</li>
+                        <li><code>site:</code> <strong>[Scope Definition]</strong> Restricts results to a specific domain (e.g., site:harvard.edu). This is the primary filter to avoid noise from the rest of the internet.</li>
+                        <li><code>filetype:</code> <strong>[Extension Targeting]</strong> Searches for specific file extensions. Common targets include pdf (documents), xls/xlsx (excel data), conf/xml (server configurations), and sql (database dumps).</li>
+                        <li><code>inurl:</code> <strong>https://www.merriam-webster.com/dictionary/pattern</strong> Looks for strings inside the URL itself. Extremely useful for finding admin panels (e.g., inurl:admin, inurl:login) or specific directories.</li>
+                        <li><code>intitle:</code> <strong>[Page Title Search]</strong> Searches for words in the HTML title tag. This is highly effective for finding directory listings (e.g., intitle:"index of").</li>
                         <li><code>intext:</code> <strong>[Body Content Search]</strong> Scans the body text of the page. Useful for finding specific error messages or leaked credentials inside a file.</li>
                     </ul>
                 </div>
@@ -266,9 +215,9 @@
                         <li><strong>Bug Bounty Hunting:</strong> Identifying vulnerabilities in scope for authorized bounty programs.</li>
                         <li><strong>OSINT Research:</strong> Gathering publicly available information for journalism or academic research.</li>
                     </ul>
-                    <p style="border-left: 3px solid #ff0041; padding-left: 15px; margin-top: 15px; color: #aaa;">
-                        <strong>⚠️ LEGAL DISCLAIMER:</strong> Google Dorking utilizes public search tools and is legal. However, using these results to access, download, or exploit private data without authorization is illegal and punishable under computer crime laws (e.g., CFAA in the US). Always operate within legal boundaries.
-                    </p>
+                    <div style="border-left: 3px solid #ff0041; padding-left: 15px; margin-top: 15px; color: #aaa;">
+                        <p><strong>⚠️ LEGAL DISCLAIMER:</strong> Google Dorking utilizes public search tools and is legal. However, using these results to access, download, or exploit private data without authorization is illegal and punishable under computer crime laws (e.g., CFAA in the US). Always operate within legal boundaries.</p>
+                    </div>
                 </div>
             </section>
         </main>
@@ -306,9 +255,6 @@
                 <p>To prevent your files from being "dorked," you should use a <code>robots.txt</code> file to disallow sensitive directories from indexing. Additionally, ensure proper server permissions (chmod) are set so that configuration files and directories are not publicly readable, and use password protection (.htaccess) for sensitive areas.</p>
             </details>
         </section>
-
-        <div class="ad-slot-bottom" style="margin: 20px 0; text-align: center;">
-        </div>
 
         <footer class="site-footer">
             <div class="footer-container">
