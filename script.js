@@ -170,7 +170,7 @@ const dorksData = [
   // ======================================================
   // NUEVAS CATEGORÍAS MEJORADAS (MODO: OCIO / MEDIA)
   // ======================================================
-  
+   
   // --- MEJORADO: CURSOS Y EDUCACIÓN ---
   {
     type: "media",
@@ -228,7 +228,10 @@ const dorksData = [
     category: "Books & Papers",
     icon: "fa-book",
     items: [
-      { label: "E-Books (EPUB)", dork: "intitle:\"index of\" epub -html -htm -php" },
+      // === CAMBIO REALIZADO AQUÍ ===
+      // El script insertará automáticamente el "nombre_libro" al principio
+      { label: "E-Books (EPUB)", dork: "filetype:epub -site:amazon.* -site:goodreads.com -site:barnesandnoble.com" },
+      
       { label: "E-Books (MOBI/AZW)", dork: "intitle:\"index of\" (mobi|azw|azw3) -html" },
       { label: "PDF Books", dork: "intitle:\"index of\" \"books\" pdf -html" },
       { label: "Programming Books", dork: "filetype:pdf (\"programming\"|\"coding\"|\"development\") -html" },
@@ -396,6 +399,7 @@ function renderDorks() {
     category.items.forEach(item => {
       const btn = document.createElement('button');
       btn.textContent = item.label;
+      // Escapamos comillas simples para el JS inline
       const safeDork = item.dork.replace(/'/g, "\\'");
       btn.onclick = () => executeSpecificDork(safeDork);
       card.appendChild(btn);
@@ -479,8 +483,15 @@ function executeSpecificDork(dorkCode) {
 
   if (dorkCode.includes("site:")) {
       finalQuery = dorkCode;
-      if(keyword) finalQuery += ` "${keyword}"`;
-      // Añadir dominio solo si no conflicto
+      // Aquí está la MAGIA: Si hay una keyword (nombre del libro), la añade.
+      // Para tu nuevo dork, esto generará: filetype:epub... "Nombre Libro"
+      // Google entiende el orden indistintamente, pero si queremos forzarlo al inicio,
+      // la lógica de abajo (else) es mejor. 
+      // PERO como tu dork tiene 'site:' (los filtros negativos), entra aquí.
+      
+      if(keyword) finalQuery = `"${keyword}" ` + finalQuery;
+      
+      // Añadir dominio objetivo solo si no conflicto (para modo SEC)
       if(domain && !dorkCode.includes('linkedin') && !dorkCode.includes('twitter')) {
            finalQuery += ` "${domain}"`;
       }
@@ -530,7 +541,7 @@ function cleanDomain(domain) {
   return domain
     .replace(/^(https?:\/\/)?(www\.)?/, '')
     .replace(/\/.*$/, '') 
-    .replace(/\.$/, '')   
+    .replace(/\.$/, '')    
     .toLowerCase();
 }
 
