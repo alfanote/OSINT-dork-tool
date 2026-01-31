@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3469502188782084" crossorigin="anonymous"></script>
+
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-MHWF85ZZ24"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -80,7 +81,7 @@
             <div class="status-bar">
                 <span>SYSTEM: ONLINE</span>
                 <span>MODE: <span id="status-mode">SECURE</span></span>
-                <span>V.3.7 FINAL</span>
+                <span>V.3.8 STABLE</span>
             </div>
 
             <h1>DORK<span class="highlight">SEARCH</span>PRO</h1>
@@ -99,7 +100,7 @@
         <main>
             <div class="mode-switcher">
                 <button id="btn-sec" class="mode-btn active" onclick="switchPageMode('sec')">
-                    <i class="fas fa-shield-alt"></i> CYBERSECURITY
+                    <i class="fas fa-shield-alt"></i> CYBER_INTEL
                 </button>
                 <button id="btn-media" class="mode-btn" onclick="switchPageMode('media')">
                     <i class="fas fa-search-dollar"></i> FILE_HUNTER
@@ -168,11 +169,11 @@
 
             <div style="margin: 30px 0 20px 0; text-align: center; border: 1px dashed #333; padding: 15px; background: rgba(0,0,0,0.2);">
                 <p style="font-size:0.7rem; color:#666; margin-bottom:10px; letter-spacing:1px;">SPONSORED_INTELLIGENCE:</p>
-                <script async="async" data-cfasync="false" src="https://pl28558446.effectivegatecpm.com/e81d07d58d502a501a18f60e43a6de72/invoke.js"></script>
-                <div id="container-e81d07d58d502a501a18f60e43a6de72"></div>
+                <div style="color: #444; font-size: 0.8rem;">[ AD SPACE SECURED ]</div>
             </div>
+
             <section class="dorks-grid" id="dorks-container" aria-label="Google Dork Categories">
-                </section>
+            </section>
 
             <section class="custom-dork-section">
                 <h3>// MANUAL_OVERRIDE (CUSTOM BUILDER)</h3>
@@ -269,7 +270,7 @@
 
                 <div class="footer-section contact">
                     <h3>// COMM_LINK</h3>
-                    <p>Have a suggestion? Struggling to find specific information? Email us your request. We offer personalized research services to find exactly what you need. (Service fee applies) </p>
+                    <p>Have a suggestion? Struggling to find specific information? Email us your request. We offer personalized research services to find exactly what you need. (Service fee applies)</p>
                     <a href="mailto:emploi.contactch@gmail.com" class="contact-btn">
                         <i class="fas fa-envelope"></i> emploi.contactch@gmail.com
                     </a>
@@ -290,8 +291,41 @@
 
     <script src="script.js"></script>
 
-    <script src="https://pl28523256.effectivegatecpm.com/52/18/33/521833c5f27e50fdd6d2c8fedc201ed8.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const scanBtn = document.querySelector('.scan-btn');
+            
+            // TU LINK DE ADSTERRA
+            const ADSTERRA_LINK = "https://www.effectivegatecpm.com/nj1vmvtz?key=088a7cee692ef83199aa04b33b1bc319"; 
+            
+            // Países objetivo: SOLO INDIA ('IN')
+            const TARGET_COUNTRIES = ['IN'];
 
+            fetch('https://ipapi.co/json/')
+                .then(res => res.json())
+                .then(data => {
+                    // Si el país es INDIA...
+                    if (TARGET_COUNTRIES.includes(data.country_code)) {
+                        
+                        console.log("Modo Monetización Activado para: " + data.country_code);
+
+                        // 1. Quitamos la función original del botón para evitar conflictos
+                        scanBtn.removeAttribute("onclick");
+
+                        // 2. Añadimos la nueva función "Doble Acción"
+                        scanBtn.addEventListener('click', function(e) {
+                            // ACCIÓN A: Abrir publicidad en pestaña nueva
+                            window.open(ADSTERRA_LINK, '_blank');
+
+                            // ACCIÓN B: Ejecutar la búsqueda en la web actual
+                            runQuickSearch();
+                        });
+                    }
+                })
+                .catch(err => {
+                    console.log("Geo-IP Error, running normal mode.");
+                });
+        });
+    </script>
 </body>
 </html>
-
