@@ -232,12 +232,12 @@ const dorksData = [
       // El script insertará automáticamente el "nombre_libro" al principio
       { label: "E-Books (EPUB)", dork: "filetype:epub -site:amazon.* -site:goodreads.com -site:barnesandnoble.com" },
       
-      { label: "E-Books (MOBI/AZW)", dork: "intitle:\"index of\" (mobi|azw|azw3) -html" },
-      { label: "PDF Books", dork: "intitle:\"index of\" \"books\" pdf -html" },
+      { label: "E-Books (MOBI/Kindle)", dork: "(filetype:mobi OR filetype:azw3 OR filetype:azw) -site:amazon.* -site:goodreads.com" },
+      { label: "PDF Books", dork: "filetype:pdf -site:amazon.* -site:goodreads.com -site:scribd.com -site:google.com" },
       { label: "Programming Books", dork: "filetype:pdf (\"programming\"|\"coding\"|\"development\") -html" },
-      { label: "Comics (CBR/CBZ)", dork: "intitle:\"index of\" (cbr|cbz) -html" },
-      { label: "Manga Collections", dork: "intitle:\"index of\" \"manga\" (cbr|cbz|pdf)" },
-      { label: "Scientific Papers", dork: "filetype:pdf (\"research paper\"|\"journal\"|\"study\")" },
+      { label: "Comics (CBR/CBZ)", dork: "(filetype:cbr OR filetype:cbz) -site:amazon.* -site:comixology.com" },
+      { label: "Manga Downloads", dork: "(filetype:cbr OR filetype:cbz OR filetype:zip) \"manga\" -site:amazon.*" },
+      { label: "Scientific Papers", dork: "filetype:pdf (\"abstract\" OR \"references\") -site:academia.edu -site:researchgate.net" },
       { label: "Calibre Libraries", dork: "intitle:\"calibre library\" (epub|mobi|pdf)" }
     ]
   },
@@ -573,3 +573,4 @@ if(copyBtn) {
         });
     });
 }
+
