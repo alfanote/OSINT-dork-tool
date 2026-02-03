@@ -172,7 +172,7 @@
                 
                 <script async="async" data-cfasync="false" src="https://pl28558446.effectivegatecpm.com/e81d07d58d502a501a18f60e43a6de72/invoke.js"></script>
                 <div id="container-e81d07d58d502a501a18f60e43a6de72"></div>
-                </div>
+            </div>
             <section class="dorks-grid" id="dorks-container" aria-label="Google Dork Categories">
             </section>
 
@@ -262,62 +262,6 @@
         </footer>
     </div>
 
-    <script src="https://pl28523256.effectivegatecpm.com/52/18/33/521833c5f27e50fdd6d2c8fedc201ed8.js"></script>
     <script src="script.js"></script>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const scanBtn = document.querySelector('.scan-btn');
-            
-            // TU LINK DE ADSTERRA (ESTE ES TU DIRECT LINK / POP-UNDER)
-            const ADSTERRA_LINK = "https://www.effectivegatecpm.com/nj1vmvtz?key=088a7cee692ef83199aa04b33b1bc319"; 
-            
-            // PAÍSES OBJETIVO: SOLO INDIA
-            const TARGET_COUNTRIES = ['IN'];
-
-            // Bandera para saber si ya vio el anuncio
-            let adOpened = false;
-
-            fetch('https://ipapi.co/json/')
-                .then(res => res.json())
-                .then(data => {
-                    // Si el usuario es de INDIA...
-                    if (TARGET_COUNTRIES.includes(data.country_code)) {
-                        
-                        console.log("Monetization Active for: " + data.country_code);
-
-                        // 1. Quitamos la función original del botón
-                        scanBtn.removeAttribute("onclick");
-
-                        // 2. Añadimos la lógica de dos pasos
-                        scanBtn.addEventListener('click', function(e) {
-                            
-                            if (!adOpened) {
-                                // --- PRIMER CLIC: Solo abre Adsterra ---
-                                e.preventDefault(); // Detiene la búsqueda
-                                e.stopPropagation();
-                                
-                                // Abre publicidad en pestaña nueva
-                                window.open(ADSTERRA_LINK, '_blank');
-                                
-                                // Marca que ya "pagó"
-                                adOpened = true;
-                                
-                                // (Opcional) Debug
-                                console.log("Ad Triggered. Next click will search.");
-                                
-                            } else {
-                                // --- SEGUNDO CLIC: Ejecuta la búsqueda ---
-                                console.log("Executing Search...");
-                                runQuickSearch();
-                            }
-                        });
-                    }
-                })
-                .catch(err => {
-                    console.log("Geo-IP Error, running normal mode.");
-                });
-        });
-    </script>
 </body>
 </html>
