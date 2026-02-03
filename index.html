@@ -51,6 +51,35 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [{
+        "@type": "Question",
+        "name": "What are Google Dorks and how do they work?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Google Dorks are advanced search operators that allow security researchers and penetration testers to discover information exposed on the internet that isn't easily accessible through standard searches. They use special commands like 'filetype:', 'inurl:', 'site:', and 'intitle:' to filter Google results and find sensitive files, admin panels, configuration files, and potential security vulnerabilities."
+        }
+      }, {
+        "@type": "Question",
+        "name": "Is it legal to use Google Dorking tools?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, using Google Dorks and dorking tools is completely legal as they only utilize public Google search operators to find publicly indexed information. However, accessing or exploiting private systems without authorization is illegal. This tool should only be used for authorized security audits, ethical penetration testing, OSINT research, or educational purposes."
+        }
+      }, {
+        "@type": "Question",
+        "name": "Does DorkSearch PRO store my search data or target domains?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. DorkSearch PRO is 100% client-side, meaning all processing happens in your browser. No data is sent to external servers or stored in any database. Your searches and target domains remain completely private."
+        }
+      }]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
       "@type": "WebApplication",
       "name": "DorkSearch PRO",
       "description": "Advanced Google Dorks generator for OSINT investigations and cybersecurity research",
@@ -207,35 +236,50 @@
                         <li><code>intext:</code> <strong>[Body Content Search]</strong> Scans the body text of the page.</li>
                     </ul>
                 </div>
-
-                <div class="content-block" style="margin-bottom: 30px;">
-                    <h3>// 03. USE_CASES & ETHICAL_PROTOCOL</h3>
-                    <p>DorkSearch PRO is designed for defensive and educational purposes. The primary use cases include:</p>
-                    <ul>
-                        <li><strong>Self-Audit:</strong> checking your own organization to ensure no sensitive files are publicly indexed.</li>
-                        <li><strong>Bug Bounty Hunting:</strong> Identifying vulnerabilities in scope for authorized bounty programs.</li>
-                        <li><strong>OSINT Research:</strong> Gathering publicly available information for journalism or academic research.</li>
-                    </ul>
-                    <div style="border-left: 3px solid #ff0041; padding-left: 15px; margin-top: 15px; color: #aaa;">
-                        <p><strong>⚠️ LEGAL DISCLAIMER:</strong> Google Dorking utilizes public search tools and is legal. However, using these results to access, download, or exploit private data without authorization is illegal. Always operate within legal boundaries.</p>
-                    </div>
-                </div>
             </section>
         </main>
 
         <section class="faq-section">
             <h2>>> FREQUENTLY_ASKED_QUESTIONS</h2>
+            
+            <details>
+                <summary>What are Google Dorks and how do they work?</summary>
+                <p><strong>Google Dorks</strong> are advanced search operators that allow security researchers and penetration testers to discover information exposed on the internet that isn't easily accessible through standard searches. They use special commands like <code>filetype:</code>, <code>inurl:</code>, <code>site:</code>, and <code>intitle:</code> to filter Google results and find sensitive files, admin panels, configuration files, and potential security vulnerabilities.</p>
+            </details>
+
             <details>
                 <summary>Is it legal to use Google Dorking tools?</summary>
-                <p>Yes, using Google Dorks and dorking tools is completely legal as they only utilize public Google search operators.</p>
+                <p>Yes, using Google Dorks and dorking tools is completely legal as they only utilize public Google search operators to find publicly indexed information. However, accessing or exploiting private systems without authorization is illegal. This tool should only be used for authorized security audits, ethical penetration testing, OSINT research, or educational purposes.</p>
             </details>
+
             <details>
                 <summary>Does DorkSearch PRO store my search data?</summary>
-                <p>No. DorkSearch PRO is 100% client-side. Your searches remain private.</p>
+                <p>No. DorkSearch PRO is <strong>100% client-side</strong>, meaning all processing happens in your browser. No data is sent to external servers or stored in any database. Your searches and target domains remain completely private. You can verify this by inspecting the open-source code on GitHub.</p>
             </details>
+
             <details>
-                <summary>Is this tool essentially a Google Hacking Database (GHDB)?</summary>
-                <p>Yes, it functions as a dynamic interface for the concepts found in the GHDB.</p>
+                <summary>What can I find using Google Dorks?</summary>
+                <p>With Google Dorks you can discover: exposed PDF, Excel, and Word documents; configuration files (.xml, .conf, .env); database backups (.sql, .bak); admin login panels; directory listings; error logs; .git folders; environment files; and many other sensitive resources that may have been unintentionally exposed to public indexing.</p>
+            </details>
+
+            <details>
+                <summary>How is this tool different from manual searches?</summary>
+                <p>DorkSearch PRO automates the creation of complex Google Dork queries by combining the proper operators and syntax automatically. Instead of manually typing <code>site:example.com filetype:pdf</code>, you simply enter your target domain and click the desired search category. This saves time and ensures proper syntax for effective results.</p>
+            </details>
+
+            <details>
+                <summary>Can I use this for bug bounty programs?</summary>
+                <p>Absolutely! Google Dorking is a fundamental reconnaissance technique in bug bounty hunting. DorkSearch PRO helps you quickly identify potentially vulnerable endpoints, exposed sensitive files, and misconfigured resources on your target domains. Always ensure you have proper authorization before testing.</p>
+            </details>
+
+            <details>
+                <summary>What is the Google Hacking Database (GHDB)?</summary>
+                <p>The <strong>Google Hacking Database (GHDB)</strong> is a comprehensive repository of Google Dorks compiled by security researchers. It categorizes dorks by vulnerability type and attack vector. DorkSearch PRO implements many common GHDB patterns while providing an intuitive interface for custom searches.</p>
+            </details>
+
+            <details>
+                <summary>Is DorkSearch PRO open source?</summary>
+                <p>Yes! DorkSearch PRO is completely open source. You can review, fork, and contribute to the code on GitHub. The entire application runs client-side with vanilla JavaScript, HTML, and CSS—no frameworks, no trackers, no hidden code.</p>
             </details>
         </section>
 
